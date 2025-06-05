@@ -499,9 +499,47 @@ Furthermore, task-specific interpretability metrics are gaining traction as a me
 
 \subsection{Over-Reliance on Training Data}
 
+One of the most significant challenges in AI-assisted software testing lies in the over-reliance on static training data. AI models, especially those deployed in production environments such as autonomous driving or recommendation systems, often experience a decline in performance due to changes in the input data distribution. This phenomenon, known as concept drift, refers to the situation where the joint distribution \(P(x, y)\) changes over time, making the model trained on historical data less effective or even misleading.
+
+In real-world systems, common causes of concept drift include seasonal variation, user behaviour shifts, or sensor degradation. If not addressed, this leads to test cases becoming obsolete and models failing silently. Traditional regression testing frameworks cannot dynamically adjust to such drifts, which necessitates the integration of performance-aware monitoring methods into AI testing.
+
+To detect and react to such changes, drift detection algorithms have been proposed and categorised into several families: statistical process control (e.g., DDM, EDDM, RDDM), sliding window techniques (e.g., ADWIN, STEPD, WSTD), and ensemble learning methods (e.g., AWE, DWM, Learn++NSE). These algorithms monitor metrics such as accuracy and error rate over time and raise alarms when statistically significant deviations are observed.
+
+For example, the Drift Detection Method (DDM) monitors the standard deviation of error rates to identify performance degradation, while ADWIN adaptively adjusts window size to reflect distributional shifts. Experimental evaluations (as shown in Fig.~\ref{fig:drift-eval}) demonstrate that accuracy remains the dominant evaluation metric, with ensemble methods generally showing better resilience to both sudden and gradual drift scenarios.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\linewidth]{picture/drift-eval.png} % 或者 "drift-eval.png" 取决于路径
+    \caption{Experimental evaluation of drift detection methods and metrics.}
+    \label{fig:drift-eval}
+\end{figure}
+
+Nevertheless, these methods still fundamentally rely on the quality and representativeness of the original training data. If training data lacks diversity or fails to anticipate rare edge cases, even the best drift detectors may not recover performance in time. Therefore, addressing this challenge also requires improving data collection pipelines, ensuring continuous data sampling, and expanding test coverage via synthetic data generation or domain generalisation techniques.
+
 \subsection{Ethical and Legal Risks in AI Testing}
 
+Beyond technical challenges, AI testing introduces substantial ethical and legal concerns, particularly in domains where decisions impact human welfare. AI systems trained on biased, imbalanced, or incomplete data can amplify societal inequalities, make unfair decisions, or generate harmful outcomes. A well-cited example comes from healthcare AI, where diagnostic tools exhibited up to 34\% higher error rates for patients with darker skin tones due to their under-representation in training datasets.
+
+From a testing perspective, this underscores the need for fairness-aware testing protocols. Unlike traditional systems that prioritise correctness and coverage, AI testing must evaluate bias, transparency, and accountability. Modern testing frameworks increasingly incorporate ethical checks such as disparate impact analysis, bias detection oracles, and explainable AI modules.
+
+For example, local explanation techniques like LIME or global attribution models like SHAP are now used in debugging to help engineers understand whether a model's decisions are being influenced by spurious or discriminatory features. These tools provide both internal visibility and external accountability.
+
+Moreover, AI testing must adhere to legal frameworks such as the General Data Protection Regulation (GDPR), which imposes constraints on data usage, model interpretability, and right to explanation. With the rise of the EU AI Act and similar legislation globally, testing AI systems for legal compliance is no longer optional.
+
+However, despite increasing awareness, most organisations still lack standardised processes for ethical AI testing. Ethical risks are often addressed retroactively — after deployment — rather than proactively during the testing phase. There is an urgent need for benchmark datasets, audit procedures, and cross-disciplinary collaborations to develop standardised ethical testing methodologies.
+
 \subsection{Scalability and Computational Costs}
+
+AI-enhanced testing techniques often promise higher accuracy, adaptability, and automation, but these come at the cost of scalability and computational efficiency. Unlike traditional software systems where test cases are manually designed and statically evaluated, AI systems rely on dynamic data flows, real-time inference, and complex model evaluations. This greatly increases the demand on compute, memory, and engineering infrastructure.
+
+For instance, ensemble-based drift detection methods such as AWE and DWM require maintaining and evaluating multiple learners simultaneously. Similarly, self-supervised program repair systems like SelfAPR depend on training diagnostic models and running inference across numerous perturbation candidates, resulting in large-scale resource usage. Reinforcement learning-based test generation further compounds this issue by introducing exploration loops and trial-and-error learning, which are inherently compute-heavy.
+
+In CI/CD pipelines, the impact is tangible. Complex AI tests slow down build cycles, hinder rapid deployment, and introduce variability in test timing. In time-sensitive domains like autonomous vehicles or industrial IoT, even slight delays in testing feedback can translate into operational risks.
+
+To address these issues, research has explored a number of solutions. Model compression and pruning techniques can reduce the footprint of testing components. Cloud-native platforms such as Kubernetes offer elastic scaling and test orchestration capabilities. Additionally, incremental and asynchronous testing strategies are gaining popularity to decouple critical-path computations from secondary validation tasks.
+
+Despite these advancements, a fundamental trade-off remains: finer-grained detection and evaluation capabilities demand greater resources. Designing AI testing systems that are both robust and scalable is an open challenge, and future research must continue to explore efficient approximations, real-time streaming analytics, and edge deployment strategies for intelligent testing.
+
 
 \section{Applications}
 
@@ -514,6 +552,21 @@ Furthermore, task-specific interpretability metrics are gaining traction as a me
 \section{Future Directions and Conclusion}
 
 \subsection{Emerging AI Techniques in Testing}
+
+As AI systems become increasingly complex, traditional testing approaches often fall short in ensuring robustness, adaptability, and explainability. This has motivated the rise of emerging AI techniques that enhance or even automate various phases of software testing. In particular, large language models (LLMs), generative AI, and prompt engineering have demonstrated significant potential in advancing the field of intelligent software quality assurance.
+
+One of the most promising directions is the use of LLMs such as GPT-4 and Codex to generate test inputs, assertions, and even repair suggestions based on natural language prompts. Unlike conventional rule-based tools, these models can understand code semantics, infer developer intent, and produce diverse test cases from limited context. For example, given a function specification in English, an LLM can automatically generate boundary condition test cases or identify missing edge cases. This capability greatly accelerates the test design process and reduces human effort in writing comprehensive test suites.
+
+Recent studies have also explored the integration of LLMs with reinforcement learning frameworks to form adaptive testing agents. These agents interact with software under test (SUT) in a feedback loop, iteratively refining their test strategies based on coverage, performance, or failure signals. Such models have been shown to outperform traditional fuzzing tools in discovering subtle bugs or security vulnerabilities in large codebases.
+
+Another emerging approach is the use of **prompt engineering** — the craft of designing structured inputs to guide LLM behaviour. Prompt-based testing tools enable developers to write high-level prompts (e.g., “generate tests for a sorting function that handles duplicates”) and let the model create both input data and expected outcomes. While effective, this technique still requires careful design to avoid hallucinated or invalid outputs, making prompt validation an active area of research.
+
+In parallel, **generative AI** techniques such as Generative Adversarial Networks (GANs) and Variational Autoencoders (VAEs) are being applied to test data generation. These models are especially useful for simulating rare or risky conditions that are hard to capture in real-world datasets. For instance, GANs can be trained to generate sensor anomalies in autonomous driving systems, enabling robust edge case testing without endangering real users.
+
+Despite their promise, these techniques introduce new challenges. LLM-generated outputs may lack formal correctness guarantees, and generative models may inadvertently learn and reproduce biases present in the training data. Additionally, computational cost remains a bottleneck, especially for enterprises with limited infrastructure.
+
+Nevertheless, the incorporation of these emerging AI techniques marks a significant shift in how software testing is conceptualised and executed. Rather than treating testing as a fixed post-development task, it becomes a dynamic, intelligent process embedded throughout the software lifecycle. As future research continues to address issues of trustworthiness, scalability, and ethical deployment, these tools are likely to become foundational components of next-generation software engineering workflows.
+
 
 \subsection{Integration with Agile and DevOps}
 
