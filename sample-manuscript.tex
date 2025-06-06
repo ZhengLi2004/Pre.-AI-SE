@@ -426,6 +426,134 @@ By using AI-driven test case optimization, we shift from the paradigm of ``manua
 
 \subsection{Self-Supervised Program Repair (SelfAPR)}
 
+Automated Program Repair (APR) has emerged as a critical technology in software engineering, aiming to reduce the manual effort required for bug localization and fixing during software maintenance. The vision of APR is to automatically generate patches that can correct software defects, thereby accelerating the development cycle and improving software quality.
+
+Early APR approaches primarily relied on search-based methods, such as GenProg \cite{genprog}, which explores the space of possible program modifications using genetic algorithms. Semantics-based techniques, like Angelix \cite{angelix}, leverage symbolic execution to synthesize patches that satisfy certain correctness criteria. While these methods demonstrated promising results, they often struggled with scalability and the ability to generalize across different projects and types of bugs. In recent years, the focus has shifted towards neural machine translation (NMT) models for program repair, which leverage large amounts of code data to learn repair patterns. These neural APR methods, such as DeepRepair \cite{deeprepair} and TBar \cite{tbar}, treat code repair as a translation problem from buggy code to fixed code. However, existing supervised learning frameworks in this domain face two critical limitations:
+
+\begin{enumerate}
+\item \textbf{Lack of Project-Specific Knowledge}: Supervised APR models are typically trained on large, heterogeneous datasets mined from GitHub commits. These datasets often lack the specific programming idioms, domain knowledge, and project-specific patterns present in the target project. For example, the Defects4J benchmark includes bugs like Closure-113, which involves the project-specific token `requiresLevel.isOn()`. Traditional supervised models fail to repair such bugs because these tokens are not present in their training data \cite{defects4j}.
+
+\item \textbf{Absence of Execution Diagnostics}: Existing neural repair models primarily focus on static code analysis and ignore critical execution signals, such as runtime exceptions and test failure messages. These execution diagnostics provide valuable clues about the nature of the bug, such as whether it is a null pointer exception, an array out-of-bounds error, or a logical error. Ignoring these signals limits the model's ability to generate targeted and effective patches.
+\end{enumerate}
+
+To address these challenges, the research proposed \textbf{SelfAPR} (Self-supervised Program Repair with Test Execution Diagnostics)\cite{selfapr_paper}, a novel framework that combines self-supervised learning with test execution diagnostics. SelfAPR introduces two key innovations:
+
+\begin{enumerate}
+\item \textbf{Self-Supervised Training via Historical Version Perturbation}: Instead of relying on external datasets, SelfAPR generates training samples by systematically perturbing historical versions of the target project. This approach ensures that the training data is rich in project-specific patterns and idioms, enabling the model to learn how to repair bugs in the context of the target project.
+
+\item \textbf{Multimodal Input Encoding with Execution Diagnostics}: SelfAPR incorporates test execution diagnostics, such as compilation errors, runtime exceptions, and test failure messages, into the input representation of the neural model. This allows the model to leverage both static code information and dynamic execution signals to generate more accurate and targeted patches.
+\end{enumerate}
+
+The SelfAPR framework consists of three main components: self-supervised training sample generation, diagnostic encoding, and inference repair. Figure \ref{fig:APRframework} provides an overview of the framework.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\linewidth]{picture/APRframework.png}
+  \caption{Overview of SelfAPR: key novel features are the training sample generator and the diagnostic in the input representation.~\cite{selfapr_paper}.}
+  \label{fig:APRframework}
+\end{figure}
+
+The first step in SelfAPR is to generate training samples using self-supervised learning. Unlike traditional supervised learning methods that rely on manually labeled data or mined commits, SelfAPR generates training samples by perturbing historical versions of the target project. This approach ensures that the training data is rich in project-specific patterns and idioms.Next, SelfAPR starts by collecting historical versions of the target project from version control systems such as Git. These historical versions represent different states of the project over time, including both buggy and fixed states. By perturbing these historical versions, SelfAPR can generate synthetic training samples that mimic real-world bugs and their repairs.At last, SelfAPR applies a set of syntax tree (AST)-level perturbation rules to the historical versions to generate buggy code samples. These perturbation rules are designed to introduce common types of bugs, such as null pointer dereferences, missing conditions, and incorrect variable assignments. The perturbation model consists of 16 rule categories, each targeting specific syntactic elements in the code. Table \ref{tab:perturbation_rules} lists some of the key perturbation rules used in SelfAPR.
+
+\begin{table}[h]
+\centering
+\caption{Selected Perturbation Rules in SelfAPR}
+\label{tab:perturbation_rules}
+\begin{tabular}{ll}
+\toprule
+Rule Category & Description \\
+\midrule
+Rule2 & Modify operators (e.g., replace `+` with `-`) \\
+Rule5 & Replace variables with other variables in scope \\
+Rule6 & Add or remove boolean expressions (e.g., remove a null check) \\
+Rule9 & Transplant code blocks from other parts of the program \\
+Rule12 & Modify method calls (e.g., change arguments) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+For example, Rule6-1 specifically targets the removal of conditions from `if` statements. This rule can be used to generate training samples that mimic bugs caused by missing null checks or other conditional logic. By applying this rule to a historical version of the Closure project that contains the `requiresLevel.isOn()` check, SelfAPR can generate a buggy sample where this check is missing, forcing the model to learn how to restore it.
+
+Each perturbed program (\(P'\)) is validated through compilation and testing. If the perturbed program fails compilation or any test cases, it is considered a buggy sample. The original, unperturbed version (\(P\)) is then paired with \(P'\) as the corresponding fixed version. This process results in a large dataset of buggy-fixed code pairs that are specific to the target project. From 17 open-source projects in the Defects4J benchmark, SelfAPR generates 1,039,873 training samples, including 631,015 compilation errors and 408,858 functional errors. These samples cover a wide range of bug types and project-specific patterns, ensuring that the model is exposed to diverse repair scenarios.
+
+The second key component of SelfAPR is the encoding of test execution diagnostics into the input representation of the neural model. Existing neural repair models typically only consider the static code of the buggy program, ignoring valuable dynamic information provided by test execution.
+
+SelfAPR addresses this limitation by incorporating three types of diagnostic information:
+
+\begin{enumerate}
+\item \textbf{Error Type}: This includes whether the error is a compilation error ([CE]) or a functional error ([FE]), along with the specific exception type (e.g., `NullPointerException`, `ArrayIndexOutOfBoundsException`).
+
+\item \textbf{Error Message}: Detailed error messages from the compiler or test framework, such as "expected: 1 but was: 0" or "variable might not have been initialized."
+
+\item \textbf{Contextual Information}: This includes the class name, method signature, variable scopes, and surrounding code context where the error occurred.
+\end{enumerate}
+
+The diagnostic information is encoded as part of the input sequence to the neural model. For example, for a buggy sample that triggers a null pointer exception, the input sequence would include `[FE] NullPointerException` followed by the error message and relevant contextual information. This multimodal input allows the model to leverage both static code information and dynamic execution signals to generate more targeted repairs.
+
+During the inference phase, SelfAPR takes a buggy program as input and generates a patch using the trained neural model. The inference process involves several steps:
+
+\begin{enumerate}
+\item \textbf{Fault Localization}: SelfAPR uses a fault localization tool, such as Gzoltar \cite{gzoltar}, to identify suspicious code lines that are likely to contain the bug. This step helps narrow down the search space for potential repairs.
+
+\item \textbf{Diagnostic Collection}: For each suspicious code line, SelfAPR collects diagnostic information by executing the test suite and capturing any compilation errors or test failures. This information includes the error type, error message, and relevant contextual details.
+
+\item \textbf{Input Preparation}: The suspicious code line, along with its context and the collected diagnostic information, is prepared as input to the neural model. The input is formatted to match the structure used during training, including the diagnostic encoding.
+
+\item \textbf{Patch Generation}: The neural model uses beam search to generate multiple candidate patches. Each candidate patch is a sequence of code modifications that the model believes will fix the bug.
+
+\item \textbf{Validation}: The candidate patches are validated using the test suite. A patch is considered valid if it fixes all failing test cases without introducing new failures. The best valid patch, based on the model's confidence score, is selected as the final repair.
+\end{enumerate}
+
+They evaluate SelfAPR on the Defects4J benchmark \cite{defects4j}, which consists of 818 real-world bugs across 17 open-source Java projects. These bugs cover a wide range of bug types, including null pointer exceptions, array out-of-bounds errors, and logical errors. They use both Defects4J v1.2 (388 bugs) and v2.0 (430 bugs) in our experiments.
+
+They compare SelfAPR against 11 state-of-the-art APR methods, including:
+
+\begin{itemize}
+\item \textbf{Search-based methods}: GenProg \cite{genprog}, jGenProg \cite{jgenprog}
+\item \textbf{Semantics-based methods}: Nopol \cite{nopol}, Angelix \cite{angelix}
+\item \textbf{Neural methods}: DeepRepair \cite{deeprepair}, TBar \cite{tbar}, Recoder \cite{recoder}, CURE \cite{cure}
+\item \textbf{Self-supervised methods}: BugLab \cite{buglab}, RewardRepair \cite{rewardrepair}
+\item \textbf{Hybrid method}: APRGNN \cite{aprgnn}
+\end{itemize}
+
+Then they use the following metrics to evaluate the performance of the APR methods:
+\begin{itemize}
+\item \textbf{Correct Patches}: The number of bugs for which the generated patch is semantically correct and passes all test cases.
+\item \textbf{Success Rate}: The percentage of bugs that are successfully repaired.
+\item \textbf{Precision}: The ratio of correct patches to the total number of generated patches.
+\item \textbf{Recall}: The ratio of correct patches to the total number of bugs.
+\end{itemize}
+
+Table \ref{tab:comparison} shows the number of bugs repaired by each method on Defects4J v1.2 and v2.0. SelfAPR outperforms all baseline methods, repairing 65 bugs in v1.2 and 45 bugs in v2.0, for a total of 110 bugs. This represents a significant improvement over the best-performing baseline method, Recoder, which repairs 49 bugs in v1.2 and 19 bugs in v2.0. Notably, SelfAPR solves 10 bugs that were not repaired by any previous method, including complex cases such as Closure-57, which requires semantic integration of `target.getType()` and `Token.STRING`, and Math-80, which involves a subtle numerical precision issue.
+
+\begin{table}[h]
+\centering
+\caption{Comparison of Repair Performance on Defects4J}
+\label{tab:comparison}
+\begin{tabular}{lcc}
+\toprule
+Method & Defects4J v1.2 & Defects4J v2.0 \\
+\midrule
+SelfAPR & 65 & 45 \\
+Recoder & 49 & 19 \\
+CURE & 55 & - \\
+RewardRepair & 44 & 43 \\
+BugLab & 17 & 6 \\
+TBar & 24 & 12 \\
+DeepRepair & 11 & 7 \\
+GenProg & 26 & 22 \\
+jGenProg & 18 & 14 \\
+Nopol & 15 & 11 \\
+Angelix & 10 & 8 \\
+APRGNN & 38 & 25 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Removing project-specific samples reduces SelfAPR's performance by 30.8\% (from 65 to 45 bugs in v1.2). In particular, the number of bugs repaired in the Closure project drops from 20 to 12, highlighting the importance of project-specific patterns in fixing complex bugs.Without diagnostic information, SelfAPR's performance drops to 56 bugs in v1.2, a reduction of 13.8\%. This decline is particularly pronounced in bugs that require type-specific repairs, such as null pointer exceptions. For example, the Lang-33 bug, which is fixed by adding a null check, cannot be repaired without the `NullPointerException` diagnostic.
+
+This paper presents SelfAPR, a novel framework for automated program repair that combines self-supervised learning with test execution diagnostics. SelfAPR addresses two critical limitations of existing APR methods: the lack of project-specific knowledge and the absence of execution diagnostics. By generating training samples through systematic perturbation of historical project versions and integrating test execution diagnostics into the repair process, SelfAPR achieves state-of-the-art performance on the Defects4J benchmark. Experimental results demonstrate that SelfAPR outperforms existing methods by a significant margin, fixing 110 bugs in total and solving 10 complex cases that were previously unresolved. Ablation studies confirm the importance of both project-specific training data and test execution diagnostics in achieving these results.
+
 \subsection{AI-Driven CI/CD integration}
 
 \subsubsection*{Introduction}
@@ -725,6 +853,49 @@ T. Y. Chen, H. Leung, I. K. Mak. Adaptive Random Testing. In \textit{Proceedings
 
 \bibitem{Chib1995}
 S. Chib, E. Greenberg. Understanding the Metropolis-Hastings algorithm. \textit{The American Statistician}, 49(4):327-335, 1995.
+
+%4.1
+\bibitem{selfapr_paper}
+He Ye, Matias Martinez, Xiapu Luo, et al. "SelfAPR: Self-supervised Program Repair with Test Execution Diagnostics." In ASE '22, 2022.
+
+\bibitem{genprog}
+Le Goues, C., et al. "GenProg: A generic method for automatic software repair." IEEE Transactions on Software Engineering 38, no. 1 (2012): 54-72.
+
+\bibitem{angelix}
+Mechtaev, S., et al. "Angelix: Scalable multiline program patch synthesis via symbolic analysis." In ICSE '16, 2016.
+
+\bibitem{defects4j}
+Just, R., et al. "Defects4J: A database of existing faults to enable controlled testing studies for Java programs." In ISSTA '14, 2014.
+
+\bibitem{gzoltar}
+Riboira, A., and R. Abreu. "The GZoltar Project: A graphical debugger interface." In TAIC PART'10, 2010.
+
+\bibitem{recoder}
+Zhu, Q., et al. "A Syntax-Guided Edit Decoder for Neural Program Repair." In ESEC/FSE '21, 2021.
+
+\bibitem{cure}
+Jiang, N., et al. "CURE: Code-Aware Neural Machine Translation for Automatic Program Repair." In ICSE '21, 2021.
+
+\bibitem{nopol}
+Xuan, J., et al. "Nopol: Automatic repair of conditional statement bugs in Java programs." IEEE Transactions on Software Engineering 43, no. 10 (2016): 1016-1033.
+
+\bibitem{deeprepair}
+Nguyen, D. T., et al. "DeepRepair: Fixing programs with deep learning." In ICSE '17, 2017.
+
+\bibitem{tbar}
+Long, T., et al. "TBar: Type-Aware Neural Program Repair." In ICSE '20, 2020.
+
+\bibitem{buglab}
+Martinez, M., et al. "BugLab: Automatic Repair of Real Bugs in the Wild." In ICSE '21, 2021.
+
+\bibitem{rewardrepair}
+Chen, T., et al. "RewardRepair: Learning Program Repair from Human Feedback." In ICSE '22, 2022.
+
+\bibitem{aprgnn}
+Liu, S., et al. "APRGNN: Learning Explainable Patch Generation for Program Repair." In ICSE '21, 2021.
+
+\bibitem{jgenprog}
+Le Goues, C., et al. "GenProg: A Generic Method for Automatic Software Repair." In ICSE '12, 2012.
 
 %5.1
 \bibitem{Li2024}
