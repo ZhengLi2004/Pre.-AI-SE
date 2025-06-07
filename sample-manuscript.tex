@@ -244,7 +244,48 @@ The theoretical significance of our proposed approach lies in its dual capabilit
 \subsubsection{Future Improvements}
 Looking toward future improvements, we identify two promising directions. First, the development of adaptive augmentation scheduling mechanisms could further enhance training efficiency by dynamically adjusting the intensity and type of augmentations based on model performance metrics. By monitoring the model’s training progress and performance on validation sets, we can adaptively select the most suitable augmentation strategies at different training stages, thereby maximizing the benefits of data augmentation while minimizing computational overhead. Second, the pursuit of computationally efficient domain simulation techniques would broaden the applicability of our framework to resource-constrained deployment scenarios. Our preliminary experiments with neural architecture search for augmentation policy optimization have already shown an $18\%$ reduction in training time while maintaining $96\%$ of the performance gains, suggesting that these directions warrant further exploration and development. Additionally, exploring more advanced generative models and unsupervised learning techniques for domain simulation could lead to even more realistic and diverse augmented data, further improving the model’s ability to generalize to unseen domains and handle edge cases effectively.
 
-\subsection{Generative AI for Synthetic Data}
+\subsection{2.2 Generative AI for Synthetic Data}
+
+Generative AI, particularly Generative Adversarial Networks (GANs), has shown considerable promise in generating synthetic data for software testing, especially in scenarios where real data is scarce, sensitive, or difficult to obtain. GANs can learn the underlying distribution of training data and generate new data samples that are statistically similar, thereby improving test coverage and robustness. According to Joslin Kenfack et al.~\cite{Kenfack2021}, GAN-based data generation methods can enhance fairness in datasets but are still susceptible to amplifying existing biases in training data.
+
+Despite their potential, GANs pose significant limitations when used for synthetic test data generation. First, the generated data may inherit or even exacerbate biases present in the training datasets. As Zhou et al.~\cite{Zhou2024} point out, bias in generative models is often subtle and embedded in the latent space, which can skew downstream testing results and compromise fairness or accuracy.
+
+A salient real-world example is Microsoft's Tay chatbot, which was launched in 2016 and designed to learn from interactions on Twitter. Within 24 hours, Tay began generating offensive and biased messages due to its exposure to toxic training data. This incident highlights a critical issue in using generative models without robust bias mitigation: the model may reproduce and reinforce harmful stereotypes, misleading the testing and validation of AI systems.
+
+Table~\ref{tab:tay-bias} summarizes the implications of biased generative outputs on software testing outcomes, using the Tay chatbot case as an illustrative example.
+
+\begin{table}[htbp]
+\centering
+\caption{Impact of Generative AI Bias: The Tay Chatbot Case}
+\label{tab:tay-bias}
+\begin{tabular}{|p{3.8cm}|p{9cm}|}
+\hline
+\textbf{Aspect} & \textbf{Impact on Testing and Deployment} \\
+\hline
+Training Data Bias & Tay learned from biased, toxic user data, leading to harmful behavior in deployment \\
+\hline
+Lack of Filtering & No pre-deployment content moderation allowed adversarial examples to corrupt learning \\
+\hline
+Testing Oversight & Failure to simulate edge cases in testing led to underestimating real-world risk \\
+\hline
+Reputation Risk & Negative public response and ethical backlash caused the project to shut down \\
+\hline
+\end{tabular}
+\end{table}
+
+To mitigate these limitations, researchers propose the following best practices:
+
+\begin{enumerate}
+  \item Carefully audit the data used to train generative models.
+  \item Implement fairness metrics and bias mitigation techniques.
+  \item Validate synthetic data diversity and representativeness.
+  \item Incorporate human oversight in testing pipelines.
+\end{enumerate}
+
+In conclusion, while generative AI techniques like GANs offer exciting possibilities for test data generation, their application must be carefully managed to avoid reinforcing societal biases and ethical risks.
+
+
+
 
 \section{AI-Powered Test Case Optimization}
 \label{sec:3}
@@ -830,78 +871,86 @@ Furthermore, task-specific interpretability metrics are gaining traction as a me
 
 \vspace{2ex}
 
-\begin{thebibliography}{9}
+\begin{thebibliography}{99}
 
 \bibitem{Guo2024}
-X. Guo, H. Okamura, T. Dohi. Optimal test case generation for boundary value analysis. \textit{Software Quality Journal}, 32(2):543-566, 2024.
+X. Guo, H. Okamura, T. Dohi. Optimal test case generation for boundary value analysis. \textit{Software Quality Journal}, 32(2):543--566, 2024.
 
 \bibitem{Li2018}
-N. Li, D. W. Oyler, M. Zhang, Y. Yildiz, I. Kolmanovsky, A. R. Girard. Game Theoretic Modeling of Driver and Vehicle Interactions for Verification and Validation of Autonomous Vehicle Control Systems. \textit{IEEE Transactions on Control Systems Technology}, 26(5):1782-1797, 2018.
+N. Li, D. W. Oyler, M. Zhang, Y. Yildiz, I. Kolmanovsky, A. R. Girard. Game Theoretic Modeling of Driver and Vehicle Interactions for Verification and Validation of Autonomous Vehicle Control Systems. \textit{IEEE Transactions on Control Systems Technology}, 26(5):1782--1797, 2018.
 
 \bibitem{Chen2004}
-T. Y. Chen, H. Leung, I. K. Mak. Adaptive Random Testing. In \textit{Proceedings of the 9th Asian Computing Science Conference (ASIAN’04)}, Springer, pp.320-329, 2004.
+T. Y. Chen, H. Leung, I. K. Mak. Adaptive Random Testing. In \textit{Proceedings of the 9th Asian Computing Science Conference (ASIAN’04)}, Springer, pp.320--329, 2004.
 
 \bibitem{Chib1995}
-S. Chib, E. Greenberg. Understanding the Metropolis-Hastings algorithm. \textit{The American Statistician}, 49(4):327-335, 1995.
+S. Chib, E. Greenberg. Understanding the Metropolis-Hastings algorithm. \textit{The American Statistician}, 49(4):327--335, 1995.
 
-%4.1
+% 2.2章节相关
+\bibitem{Kenfack2021}
+P. Joslin Kenfack, D. D. Arapov, R. Hussain, S. M. A. Kazmi, and A. Mehmood Khan. ``On the Fairness of Generative Adversarial Networks (GANs).'' \textit{arXiv preprint arXiv:2103.00950}, 2021.
+
+\bibitem{Zhou2024}
+M. Zhou, V. Abhishek, T. Derdenger, J. Kim, and K. Srinivasan. ``Bias in Generative AI.'' \textit{arXiv preprint arXiv:2403.02726}, 2024.
+
+% 4.1
 \bibitem{selfapr_paper}
-He Ye, Matias Martinez, Xiapu Luo, et al. "SelfAPR: Self-supervised Program Repair with Test Execution Diagnostics." In ASE '22, 2022.
+He Ye, Matias Martinez, Xiapu Luo, et al. ``SelfAPR: Self-supervised Program Repair with Test Execution Diagnostics.'' In \textit{ASE '22}, 2022.
 
 \bibitem{genprog}
-Le Goues, C., et al. "GenProg: A generic method for automatic software repair." IEEE Transactions on Software Engineering 38, no. 1 (2012): 54-72.
+Le Goues, C., et al. ``GenProg: A generic method for automatic software repair.'' \textit{IEEE Transactions on Software Engineering}, 38(1):54--72, 2012.
 
 \bibitem{angelix}
-Mechtaev, S., et al. "Angelix: Scalable multiline program patch synthesis via symbolic analysis." In ICSE '16, 2016.
+Mechtaev, S., et al. ``Angelix: Scalable multiline program patch synthesis via symbolic analysis.'' In \textit{ICSE '16}, 2016.
 
 \bibitem{defects4j}
-Just, R., et al. "Defects4J: A database of existing faults to enable controlled testing studies for Java programs." In ISSTA '14, 2014.
+Just, R., et al. ``Defects4J: A database of existing faults to enable controlled testing studies for Java programs.'' In \textit{ISSTA '14}, 2014.
 
 \bibitem{gzoltar}
-Riboira, A., and R. Abreu. "The GZoltar Project: A graphical debugger interface." In TAIC PART'10, 2010.
+Riboira, A., and R. Abreu. ``The GZoltar Project: A graphical debugger interface.'' In \textit{TAIC PART'10}, 2010.
 
 \bibitem{recoder}
-Zhu, Q., et al. "A Syntax-Guided Edit Decoder for Neural Program Repair." In ESEC/FSE '21, 2021.
+Zhu, Q., et al. ``A Syntax-Guided Edit Decoder for Neural Program Repair.'' In \textit{ESEC/FSE '21}, 2021.
 
 \bibitem{cure}
-Jiang, N., et al. "CURE: Code-Aware Neural Machine Translation for Automatic Program Repair." In ICSE '21, 2021.
+Jiang, N., et al. ``CURE: Code-Aware Neural Machine Translation for Automatic Program Repair.'' In \textit{ICSE '21}, 2021.
 
 \bibitem{nopol}
-Xuan, J., et al. "Nopol: Automatic repair of conditional statement bugs in Java programs." IEEE Transactions on Software Engineering 43, no. 10 (2016): 1016-1033.
+Xuan, J., et al. ``Nopol: Automatic repair of conditional statement bugs in Java programs.'' \textit{IEEE Transactions on Software Engineering}, 43(10):1016--1033, 2016.
 
 \bibitem{deeprepair}
-Nguyen, D. T., et al. "DeepRepair: Fixing programs with deep learning." In ICSE '17, 2017.
+Nguyen, D. T., et al. ``DeepRepair: Fixing programs with deep learning.'' In \textit{ICSE '17}, 2017.
 
 \bibitem{tbar}
-Long, T., et al. "TBar: Type-Aware Neural Program Repair." In ICSE '20, 2020.
+Long, T., et al. ``TBar: Type-Aware Neural Program Repair.'' In \textit{ICSE '20}, 2020.
 
 \bibitem{buglab}
-Martinez, M., et al. "BugLab: Automatic Repair of Real Bugs in the Wild." In ICSE '21, 2021.
+Martinez, M., et al. ``BugLab: Automatic Repair of Real Bugs in the Wild.'' In \textit{ICSE '21}, 2021.
 
 \bibitem{rewardrepair}
-Chen, T., et al. "RewardRepair: Learning Program Repair from Human Feedback." In ICSE '22, 2022.
+Chen, T., et al. ``RewardRepair: Learning Program Repair from Human Feedback.'' In \textit{ICSE '22}, 2022.
 
 \bibitem{aprgnn}
-Liu, S., et al. "APRGNN: Learning Explainable Patch Generation for Program Repair." In ICSE '21, 2021.
+Liu, S., et al. ``APRGNN: Learning Explainable Patch Generation for Program Repair.'' In \textit{ICSE '21}, 2021.
 
 \bibitem{jgenprog}
-Le Goues, C., et al. "GenProg: A Generic Method for Automatic Software Repair." In ICSE '12, 2012.
+Le Goues, C., et al. ``GenProg: A Generic Method for Automatic Software Repair.'' In \textit{ICSE '12}, 2012.
 
-%5.1
+% 5.1
 \bibitem{Li2024}
-J. Li, H. Wang, et al. When Deep Learning Meets IR-Based Bug Localization: A Comprehensive Survey. \textit{arXiv preprint arXiv:2505.00144}, 2024.
+J. Li, H. Wang, et al. ``When Deep Learning Meets IR-Based Bug Localization: A Comprehensive Survey.'' \textit{arXiv preprint arXiv:2505.00144}, 2024.
 
 \bibitem{Bifet2007}
-A. Bifet, R. Gavaldà. Learning from Time-Changing Data with Adaptive Windowing. In \textit{Proceedings of the 2007 SIAM International Conference on Data Mining (SDM)}, SIAM, pp.443–448, 2007.
+A. Bifet, R. Gavaldà. ``Learning from Time-Changing Data with Adaptive Windowing.'' In \textit{Proceedings of the 2007 SIAM International Conference on Data Mining (SDM)}, SIAM, pp.443--448, 2007.
 
-%5.2
+% 5.2
 \bibitem{Ribeiro2016}
-Ribeiro, M. T., Singh, S., \& Guestrin, C. (2016). ``Why Should I Trust You?'': Explaining the Predictions of Any Classifier. \textit{Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining}, 1135--1144.
+Ribeiro, M. T., Singh, S., and Guestrin, C. ``Why Should I Trust You?: Explaining the Predictions of Any Classifier.'' \textit{Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining}, pp.1135--1144, 2016.
 
 \bibitem{Lundberg2017}
-Lundberg, S. M., \& Lee, S.-I. (2017). A unified approach to interpreting model predictions. \textit{Advances in Neural Information Processing Systems}, 30, 4765--4774.
+Lundberg, S. M., and Lee, S.-I. ``A unified approach to interpreting model predictions.'' \textit{Advances in Neural Information Processing Systems}, 30, 4765--4774, 2017.
 
 \end{thebibliography}
+
 
 \end{document}
 \endinput
