@@ -6,7 +6,7 @@
 - 根据解决方法，提出实验结果
 - 根据实验结果，提出理论意义
 
-下面是每一个章节对应的PPT内容映射，以及相应的写作建议：
+下面是剩余章节对应的PPT内容映射，以及相应的写作建议：
 
 ---
 
@@ -29,75 +29,12 @@
 ---
 
 ### **2. AI-Driven Test Data Generation**
-#### **2.1 Data Augmentation for Edge Cases**
-- **映射PPT内容**：
-  - **幻灯片 27-31**：数据增强技术分类（领域级、图像级、特征级）。
-  - **幻灯片 52**：对抗样本生成技术综述。
-- **写作建议**：
-  - 详细描述数据增强方法（如旋转、翻转、噪声添加），并引用PACS/Office-Home数据集案例。
-  - 讨论对抗样本生成（I-FGSM、JSMA）在边缘测试中的作用。
-
 #### **2.2 Generative AI for Synthetic Data**
 - **映射PPT内容**：
   - **幻灯片 17**：生成式AI的伦理风险（训练数据过时或带偏见）。
 - **写作建议**：
   - 分析生成式AI（如GANs）在测试数据生成中的潜力与局限。
   - 引用微软Tay聊天机器人案例，讨论数据偏见对测试结果的影响。
-
----
-
-### **3. AI-Powered Test Case Optimization**
-#### **3.1 Boundary Value Analysis with BCD Optimization**
-- **映射PPT内容**：
-  - **幻灯片 60-63**：BCD（Boundary Coverage Distance）算法与测试用例生成。
-  - **幻灯片 66-67**：BCD优化策略的实验结果（杀毒率提升80%）。
-- **写作建议**：
-  - 解释BCD公式（公式(1)-(5)），并结合MCMC优化策略。
-  - 引用实验数据，对比传统方法（RT、ART）的缺陷检测效果。
-
-#### **3.2 Reinforcement Learning for Test Exploration**
-- **映射PPT内容**：
-  - **幻灯片 59**：机器学习与MCMC结合生成测试数据的趋势。
-- **写作建议**：
-  - 探讨强化学习在复杂场景（如自动驾驶动态环境）中的测试探索能力。
-  - 引用文献[2] S78案例，说明动态阈值设计的必要性。
-
----
-
-### **4. AI in Automated Testing Frameworks**
-#### **4.1 Self-Supervised Program Repair (SelfAPR)**
-- **映射PPT内容**：
-  - **幻灯片 87-93**：SelfAPR的原理（扰动模型、诊断提取）。
-  - **幻灯片 94**：SelfAPR实验结果（修复成功率与测试覆盖率）。
-- **写作建议**：
-  - 描述SelfAPR的工作流程（扰动生成、诊断训练、推理修复）。
-  - 引用实验数据，对比监督学习与自监督学习的修复效果。
-
-#### **4.2 AI-Driven CI/CD Integration**
-- **映射PPT内容**：
-  - **幻灯片 144-145**：Jenkins+Pytest流水线示例。
-  - **幻灯片 147-150**：云原生测试平台架构（Docker、Kubernetes）。
-- **写作建议**：
-  - 结合代码示例（Jenkinsfile），说明AI如何加速CI/CD流程。
-  - 讨论云原生平台（nGrinder、Terraform）在高并发测试中的应用。
-
----
-
-### **5. AI for Defect Prediction and Root-Cause Analysis**
-#### **5.1 Machine Learning for Bug Localization**
-- **映射PPT内容**：
-  - **幻灯片 68**：性能感知漂移检测（ADWIN、EDDM算法）。
-- **写作建议**：
-  - 解释漂移检测算法（ADWIN）的数学原理，并引用实验数据。
-  - 探讨漂移检测在持续测试中的作用（如动态调整测试策略）。
-
-#### **5.2 Explainable AI (XAI) in Test Debugging**
-- **映射PPT内容**：
-  - **幻灯片 117-122**：XAI目标（信任度、因果关系、隐私意识）。
-  - **幻灯片 124**：混合XAI方法（透明模型与黑箱模型结合）。
-- **写作建议**：
-  - 分析LIME、SHAP等XAI工具在调试中的应用。
-  - 引用医疗AI案例，说明可解释性对用户信任的重要性。
 
 ---
 

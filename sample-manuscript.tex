@@ -220,7 +220,7 @@ Third, feature-level augmentation manipulates intermediate feature maps through 
 \end{figure}
 
 \subsubsection{Ablation Study}
-Our ablation study on the DomainNet dataset provides compelling evidence of the effectiveness of our multi-level approach. When combining domain-level and image-level augmentations, we achieve $72.3\%$ accuracy, which represents a substantial $15.8\%$ improvement over single-level augmentation strategies. The key innovation in our framework lies in the adversarial sample generation component, which employs state-of-the-art techniques such as Iterative Fast Gradient Sign Method (I-FGSM) and Jacobian Saliency Map Attack (JSMA). These methods create challenging edge cases by strategically perturbing inputs along directions that are particularly sensitive to the model’s current decision boundaries. As shown in Table \ref{tab:aug_performance}, our targeted noise injection approach improves model robustness against real-world distribution shifts by $29\%$ compared to baseline methods. The combination of domain and image-level augmentations demonstrates particularly strong performance gains across multiple domains, with improvements of up to $10.7\%$ over baseline approaches in certain scenarios. Additionally, our ablation study reveals that the feature-level augmentation contributes significantly to the overall performance improvement, especially when combined with the other two levels of augmentation. This suggests that the synergy between different levels of augmentation is crucial for achieving optimal results in domain generalization tasks.+
+Our ablation study on the DomainNet dataset provides compelling evidence of the effectiveness of our multi-level approach. When combining domain-level and image-level augmentations, we achieve $72.3\%$ accuracy, which represents a substantial $15.8\%$ improvement over single-level augmentation strategies. The key innovation in our framework lies in the adversarial sample generation component, which employs state-of-the-art techniques such as Iterative Fast Gradient Sign Method (I-FGSM) and Jacobian Saliency Map Attack (JSMA). These methods create challenging edge cases by strategically perturbing inputs along directions that are particularly sensitive to the model’s current decision boundaries. As shown in Table \ref{tab:aug_performance}, our targeted noise injection approach improves model robustness against real-world distribution shifts by $29\%$ compared to baseline methods. The combination of domain and image-level augmentations demonstrates particularly strong performance gains across multiple domains, with improvements of up to $10.7\%$ over baseline approaches in certain scenarios. Additionally, our ablation study reveals that the feature-level augmentation contributes significantly to the overall performance improvement, especially when combined with the other two levels of augmentation. This suggests that the synergy between different levels of augmentation is crucial for achieving optimal results in domain generalization tasks.
 
 \begin{table}[htb]
     \centering
@@ -245,8 +245,6 @@ The theoretical significance of our proposed approach lies in its dual capabilit
 Looking toward future improvements, we identify two promising directions. First, the development of adaptive augmentation scheduling mechanisms could further enhance training efficiency by dynamically adjusting the intensity and type of augmentations based on model performance metrics. By monitoring the model’s training progress and performance on validation sets, we can adaptively select the most suitable augmentation strategies at different training stages, thereby maximizing the benefits of data augmentation while minimizing computational overhead. Second, the pursuit of computationally efficient domain simulation techniques would broaden the applicability of our framework to resource-constrained deployment scenarios. Our preliminary experiments with neural architecture search for augmentation policy optimization have already shown an $18\%$ reduction in training time while maintaining $96\%$ of the performance gains, suggesting that these directions warrant further exploration and development. Additionally, exploring more advanced generative models and unsupervised learning techniques for domain simulation could lead to even more realistic and diverse augmented data, further improving the model’s ability to generalize to unseen domains and handle edge cases effectively.
 
 \subsection{Generative AI for Synthetic Data}
-
-\subsection{Adversarial Sample Generation}
 
 \section{AI-Powered Test Case Optimization}
 \label{sec:3}
@@ -431,7 +429,7 @@ Automated Program Repair (APR) has emerged as a critical technology in software 
 Early APR approaches primarily relied on search-based methods, such as GenProg \cite{genprog}, which explores the space of possible program modifications using genetic algorithms. Semantics-based techniques, like Angelix \cite{angelix}, leverage symbolic execution to synthesize patches that satisfy certain correctness criteria. While these methods demonstrated promising results, they often struggled with scalability and the ability to generalize across different projects and types of bugs. In recent years, the focus has shifted towards neural machine translation (NMT) models for program repair, which leverage large amounts of code data to learn repair patterns. These neural APR methods, such as DeepRepair \cite{deeprepair} and TBar \cite{tbar}, treat code repair as a translation problem from buggy code to fixed code. However, existing supervised learning frameworks in this domain face two critical limitations:
 
 \begin{enumerate}
-\item \textbf{Lack of Project-Specific Knowledge}: Supervised APR models are typically trained on large, heterogeneous datasets mined from GitHub commits. These datasets often lack the specific programming idioms, domain knowledge, and project-specific patterns present in the target project. For example, the Defects4J benchmark includes bugs like Closure-113, which involves the project-specific token `requiresLevel.isOn()`. Traditional supervised models fail to repair such bugs because these tokens are not present in their training data \cite{defects4j}.
+\item \textbf{Lack of Project-Specific Knowledge}: Supervised APR models are typically trained on large, heterogeneous datasets mined from GitHub commits. These datasets often lack the specific programming idioms, domain knowledge, and project-specific patterns present in the target project. For example, the Defects4J benchmark includes bugs like Closure-113, which involves the project-specific token \texttt{requiresLevel.isOn()}. Traditional supervised models fail to repair such bugs because these tokens are not present in their training data \cite{defects4j}.
 
 \item \textbf{Absence of Execution Diagnostics}: Existing neural repair models primarily focus on static code analysis and ignore critical execution signals, such as runtime exceptions and test failure messages. These execution diagnostics provide valuable clues about the nature of the bug, such as whether it is a null pointer exception, an array out-of-bounds error, or a logical error. Ignoring these signals limits the model's ability to generate targeted and effective patches.
 \end{enumerate}
@@ -463,7 +461,7 @@ The first step in SelfAPR is to generate training samples using self-supervised 
 \toprule
 Rule Category & Description \\
 \midrule
-Rule2 & Modify operators (e.g., replace `+` with `-`) \\
+Rule2 & Modify operators (e.g., replace \texttt{+} with \texttt{-}) \\
 Rule5 & Replace variables with other variables in scope \\
 Rule6 & Add or remove boolean expressions (e.g., remove a null check) \\
 Rule9 & Transplant code blocks from other parts of the program \\
@@ -472,7 +470,7 @@ Rule12 & Modify method calls (e.g., change arguments) \\
 \end{tabular}
 \end{table}
 
-For example, Rule6-1 specifically targets the removal of conditions from `if` statements. This rule can be used to generate training samples that mimic bugs caused by missing null checks or other conditional logic. By applying this rule to a historical version of the Closure project that contains the `requiresLevel.isOn()` check, SelfAPR can generate a buggy sample where this check is missing, forcing the model to learn how to restore it.
+For example, Rule6-1 specifically targets the removal of conditions from \texttt{if} statements. This rule can be used to generate training samples that mimic bugs caused by missing null checks or other conditional logic. By applying this rule to a historical version of the Closure project that contains the \texttt{requiresLevel.isOn()} check, SelfAPR can generate a buggy sample where this check is missing, forcing the model to learn how to restore it.
 
 Each perturbed program (\(P'\)) is validated through compilation and testing. If the perturbed program fails compilation or any test cases, it is considered a buggy sample. The original, unperturbed version (\(P\)) is then paired with \(P'\) as the corresponding fixed version. This process results in a large dataset of buggy-fixed code pairs that are specific to the target project. From 17 open-source projects in the Defects4J benchmark, SelfAPR generates 1,039,873 training samples, including 631,015 compilation errors and 408,858 functional errors. These samples cover a wide range of bug types and project-specific patterns, ensuring that the model is exposed to diverse repair scenarios.
 
@@ -481,14 +479,14 @@ The second key component of SelfAPR is the encoding of test execution diagnostic
 SelfAPR addresses this limitation by incorporating three types of diagnostic information:
 
 \begin{enumerate}
-\item \textbf{Error Type}: This includes whether the error is a compilation error ([CE]) or a functional error ([FE]), along with the specific exception type (e.g., `NullPointerException`, `ArrayIndexOutOfBoundsException`).
+\item \textbf{Error Type}: This includes whether the error is a compilation error ([CE]) or a functional error ([FE]), along with the specific exception type (e.g., \texttt{NullPointerException}, \texttt{ArrayIndexOutOfBoundsException}).
 
 \item \textbf{Error Message}: Detailed error messages from the compiler or test framework, such as "expected: 1 but was: 0" or "variable might not have been initialized."
 
 \item \textbf{Contextual Information}: This includes the class name, method signature, variable scopes, and surrounding code context where the error occurred.
 \end{enumerate}
 
-The diagnostic information is encoded as part of the input sequence to the neural model. For example, for a buggy sample that triggers a null pointer exception, the input sequence would include `[FE] NullPointerException` followed by the error message and relevant contextual information. This multimodal input allows the model to leverage both static code information and dynamic execution signals to generate more targeted repairs.
+The diagnostic information is encoded as part of the input sequence to the neural model. For example, for a buggy sample that triggers a null pointer exception, the input sequence would include \texttt{[FE] NullPointerException} followed by the error message and relevant contextual information. This multimodal input allows the model to leverage both static code information and dynamic execution signals to generate more targeted repairs.
 
 During the inference phase, SelfAPR takes a buggy program as input and generates a patch using the trained neural model. The inference process involves several steps:
 
@@ -524,7 +522,7 @@ Then they use the following metrics to evaluate the performance of the APR metho
 \item \textbf{Recall}: The ratio of correct patches to the total number of bugs.
 \end{itemize}
 
-Table \ref{tab:comparison} shows the number of bugs repaired by each method on Defects4J v1.2 and v2.0. SelfAPR outperforms all baseline methods, repairing 65 bugs in v1.2 and 45 bugs in v2.0, for a total of 110 bugs. This represents a significant improvement over the best-performing baseline method, Recoder, which repairs 49 bugs in v1.2 and 19 bugs in v2.0. Notably, SelfAPR solves 10 bugs that were not repaired by any previous method, including complex cases such as Closure-57, which requires semantic integration of `target.getType()` and `Token.STRING`, and Math-80, which involves a subtle numerical precision issue.
+Table \ref{tab:comparison} shows the number of bugs repaired by each method on Defects4J v1.2 and v2.0. SelfAPR outperforms all baseline methods, repairing 65 bugs in v1.2 and 45 bugs in v2.0, for a total of 110 bugs. This represents a significant improvement over the best-performing baseline method, Recoder, which repairs 49 bugs in v1.2 and 19 bugs in v2.0. Notably, SelfAPR solves 10 bugs that were not repaired by any previous method, including complex cases such as Closure-57, which requires semantic integration of \texttt{target.getType()} and \texttt{Token.STRING}, and Math-80, which involves a subtle numerical precision issue.
 
 \begin{table}[h]
 \centering
@@ -550,7 +548,7 @@ APRGNN & 38 & 25 \\
 \end{tabular}
 \end{table}
 
-Removing project-specific samples reduces SelfAPR's performance by 30.8\% (from 65 to 45 bugs in v1.2). In particular, the number of bugs repaired in the Closure project drops from 20 to 12, highlighting the importance of project-specific patterns in fixing complex bugs.Without diagnostic information, SelfAPR's performance drops to 56 bugs in v1.2, a reduction of 13.8\%. This decline is particularly pronounced in bugs that require type-specific repairs, such as null pointer exceptions. For example, the Lang-33 bug, which is fixed by adding a null check, cannot be repaired without the `NullPointerException` diagnostic.
+Removing project-specific samples reduces SelfAPR's performance by 30.8\% (from 65 to 45 bugs in v1.2). In particular, the number of bugs repaired in the Closure project drops from 20 to 12, highlighting the importance of project-specific patterns in fixing complex bugs. Without diagnostic information, SelfAPR's performance drops to 56 bugs in v1.2, a reduction of 13.8\%. This decline is particularly pronounced in bugs that require type-specific repairs, such as null pointer exceptions. For example, the Lang-33 bug, which is fixed by adding a null check, cannot be repaired without the \texttt{NullPointerException} diagnostic.
 
 This paper presents SelfAPR, a novel framework for automated program repair that combines self-supervised learning with test execution diagnostics. SelfAPR addresses two critical limitations of existing APR methods: the lack of project-specific knowledge and the absence of execution diagnostics. By generating training samples through systematic perturbation of historical project versions and integrating test execution diagnostics into the repair process, SelfAPR achieves state-of-the-art performance on the Defects4J benchmark. Experimental results demonstrate that SelfAPR outperforms existing methods by a significant margin, fixing 110 bugs in total and solving 10 complex cases that were previously unresolved. Ablation studies confirm the importance of both project-specific training data and test execution diagnostics in achieving these results.
 
@@ -703,8 +701,6 @@ While there are challenges associated with AI-driven CI/CD, such as ensuring the
 
 Future developments are likely to see even deeper integration of AI with CI/CD, including the use of quantum computing for more efficient AI models and the expansion of AI-driven practices into new domains, such as financial services and healthcare.
 
-\subsection{DeepXplore for White-Box Testing}
-
 \section{AI for Defect Prediction and Root-Cause Analysis}
 
 \subsection{Machine Learning for Bug Localization}
@@ -749,7 +745,7 @@ This formulation ensures that the detection is statistically sound, providing pr
 Applying ADWIN (Adaptive Windowing) to the continuous testing of bug localization systems enables a range of tangible benefits, especially in environments characterized by frequent code changes and evolving data distributions. Concept drift—whether gradual or abrupt—can severely impact the reliability of machine learning-based localization models. These drifts are often introduced by new programming paradigms, third-party library updates, or changes in software development patterns (e.g., shifting from object-oriented to functional styles). Integrating ADWIN into the model monitoring pipeline allows development teams to detect and respond proactively to such changes before they manifest as critical failures.
 
 (1) Real-time performance monitoring.
-Key evaluation metrics such as Top-K accuracy, precision, recall, F1-score, and Mean Reciprocal Rank (MRR) can be continuously tracked in streaming or batch-incremental settings. ADWIN leverages a statistically grounded approach by maintaining a dynamic sliding window over performance logs or prediction results. When a significant change in the mean performance of the recent window (\( \mu\)\( W_1 \) )versus the historical window (\( \mu\)\( W_0 \))is detected beyond the Hoeffding inequality-based threshold, the system flags the event as drift. In such cases, the system can automatically trigger retraining procedures with recent test feedback or even initiate emergency rollback to previously validated model states. This approach ensures early identification and mitigation of performance deterioration before it affects mission-critical tasks such as automated triage or root cause suggestion.
+Key evaluation metrics such as Top-K accuracy, precision, recall, F1-score, and Mean Reciprocal Rank (MRR) can be continuously tracked in streaming or batch-incremental settings. ADWIN leverages a statistically grounded approach by maintaining a dynamic sliding window over performance logs or prediction results. When a significant change in the mean performance of the recent window (\( \mu\)\( W_1 \) ) versus the historical window (\( \mu\)\( W_0 \))is detected beyond the Hoeffding inequality-based threshold, the system flags the event as drift. In such cases, the system can automatically trigger retraining procedures with recent test feedback or even initiate emergency rollback to previously validated model states. This approach ensures early identification and mitigation of performance deterioration before it affects mission-critical tasks such as automated triage or root cause suggestion.
 
 (2) Dynamic test strategy adjustment.
 In drift-aware testing frameworks, testing strategies are no longer static. ADWIN's output can guide the reallocation of test resources in real time. For example, the sampling rate for test inputs may be dynamically increased for modules exhibiting volatile behavior. Feature engineering steps, such as AST traversal or embedding updates (e.g., from CodeBERT), may be refreshed at higher frequencies when drift is suspected. Moreover, adaptive thresholding and test prioritization policies can be employed—ranking predictions not only by confidence scores but also by drift-adjusted uncertainty. Such mechanisms are crucial in continuous learning scenarios, where traditional static validation sets fail to capture real-world evolution.
@@ -812,7 +808,7 @@ XAI also contributes to privacy awareness by exposing which input attributes hav
 
 Looking ahead, the role of XAI in AI testing is expected to evolve from passive interpretation to active guidance. Emerging research explores causal explainability, where models attempt to uncover not just correlations but underlying causal mechanisms that drive predictions. Interactive explanation interfaces are also being developed, allowing developers and domain experts to ask “what-if” and “why-not” questions during testing and debugging. These tools enable iterative, dialogue-based model refinement that closely resembles the scientific method.
 
-Furthermore, task-specific interpretability metrics are gaining traction as a means to quantify the usefulness and clarity of explanations in different contexts. For example, interpretability requirements in legal AI may differ vastly from those in autonomous robotics. By tailoring XAI tools to match the cognitive and operational needs of end-users, researchers aim to create more accessible, accountable, and adaptive testing environments. In this future paradigm, XAI will not merely be a diagnostic tool, but a central component of the AI development lifecycle—one that shapes model architecture, training, validation, and deployment in a feedback-rich, human-aligned manner.
+Furthermore, task-specific interpretability metrics are gaining traction as a means to quantify the usefulness and clarity of explanations in different contexts. For example, interpretability requirements in legal AI may differ vastly from those in autonomous robotics. By tailoring XAI tools to match the cognitive and operational needs of end-users, researchers aim to create more accessible, accountable, and adaptive testing environments. In this future paradigm, XAI will not merely be a diagnostic tool, but a central component of the AI development lifecycle---one that shapes model architecture, training, validation, and deployment in a feedback-rich, human-aligned manner.
 
 \section{Challenges}
 
@@ -820,23 +816,17 @@ Furthermore, task-specific interpretability metrics are gaining traction as a me
 
 \subsection{Ethical and Legal Risks in AI Testing}
 
-\subsection{Scalability and Computational Costs}
-
 \section{Applications}
 
 \subsection{AI in Medical Software Testing}
 
 \subsection{AI for Autonomous Driving Validation}
 
-\subsection{AI in Chatbot and NLP Testing}
-
 \section{Future Directions and Conclusion}
 
 \subsection{Emerging AI Techniques in Testing}
 
 \subsection{Integration with Agile and DevOps}
-
-\subsection{Summary and Research Implications}
 
 \vspace{2ex}
 
