@@ -28,23 +28,7 @@
 
 ---
 
-### **2. AI-Driven Test Data Generation**
-#### **2.2 Generative AI for Synthetic Data**
-- **映射PPT内容**：
-  - **幻灯片 17**：生成式AI的伦理风险（训练数据过时或带偏见）。
-- **写作建议**：
-  - 分析生成式AI（如GANs）在测试数据生成中的潜力与局限。
-  - 引用微软Tay聊天机器人案例，讨论数据偏见对测试结果的影响。
-
----
-
 ### **6. Challenges in AI-Assisted Testing**
-#### **6.1 Over-Reliance on Training Data**
-- **映射PPT内容**：
-  - **幻灯片 6-8**：数据依赖性引发系统性风险（微软Tay案例）。
-- **写作建议**：
-  - 讨论数据偏差对AI测试的影响，并引用文献[1]第5页的实验结果。
-  - 提出解决方案（如领域泛化、数据增强）。
 
 #### **6.2 Ethical and Legal Risks in AI Testing**
 - **映射PPT内容**：
@@ -55,32 +39,15 @@
 
 ---
 
-### **7. Real-World Applications and Case Studies**
-#### **7.1 AI in Medical Software Testing**
-- **映射PPT内容**：
-  - **幻灯片 15-16**：医疗AI公平性危机（深色皮肤样本缺失）。
-- **写作建议**：
-  - 详细描述医疗AI的公平性测试方法（Instance Space Adequacy）。
-  - 引用PACS数据集实验，说明数据多样性对诊断准确性的提升。
-
-#### **7.2 AI for Autonomous Driving Validation**
-- **映射PPT内容**：
-  - **幻灯片 17**：自动驾驶的“Oracle Problem”（动态施工区域测试）。
-- **写作建议**：
-  - 分析DeepXplore框架的神经元覆盖率（Neuron Coverage）。
-  - 引用自动驾驶撞护栏案例，说明AI测试的必要性。
-
----
-
-### **8. Future Directions and Conclusion**
-#### **8.1 Emerging AI Techniques in Testing**
+### **7. Future Directions and Conclusion**
+#### **7.1 Emerging AI Techniques in Testing**
 - **映射PPT内容**：
   - **幻灯片 138**：未来研究方向（LLM辅助测试输入生成）。
 - **写作建议**：
   - 探讨大语言模型（如GPT-4）在测试用例生成中的潜力。
   - 引用文献[1]第9页，提出基于提示工程的测试自动化方案。
 
-#### **8.2 Integration with Agile and DevOps**
+#### **7.2 Integration with Agile and DevOps**
 - **映射PPT内容**：
   - **幻灯片 153-154**：敏捷测试与传统测试对比。
 - **写作建议**：
