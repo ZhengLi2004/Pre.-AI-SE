@@ -199,6 +199,10 @@
 
 \section{AI-Driven Test Data Generation}
 
+Traditional test data generation struggles with two critical limitations: (1) insufficient coverage of edge cases that dominate real-world failure scenarios, and (2) reliance on manual curation for synthetic data creation. As shown in Table \ref{tab:aug_performance}, conventional methods on the PACS dataset achieve only 64.2\% accuracy for ``Art'' samples and 58.7\% for ``Cartoon'' domains, highlighting gaps in handling distribution shifts.
+
+This section systematically addresses these challenges through two complementary approaches. First, we propose a multi-level data augmentation framework that integrates domain-level style transfer, image-level transformations, and feature-level interpolation to bridge distributional gaps. Second, we introduce generative AI techniques like GANs to automate synthetic data creation while addressing bias risks through fairness-aware perturbation rules (Table \ref{tab:tay-case} demonstrates the critical need for bias mitigation).
+
 \subsection{Data Augmentation for Edge Cases}
 \subsubsection{Introduction}
 The fundamental challenge in domain generalization stems from the distributional discrepancy between training and test data, which severely compromises model performance on unseen domains. Traditional machine learning paradigms assume identical distributions across training and test sets \cite{Chen2004}, but this assumption often fails in real-world scenarios where edge cases and domain shifts are prevalent. Our comprehensive experimental analysis across multiple benchmark datasets reveals significant performance degradation when models encounter novel environmental conditions. Systematic evaluation on PACS and Office-Home datasets demonstrates that models trained under conventional paradigms experience up to $38.7\%$ performance degradation when tested on previously unseen domains. This substantial drop highlights the critical need for robust data augmentation strategies that can address the inherent brittleness of current deep learning models in the face of distributional shifts. Furthermore, recent studies have shown that even state-of-the-art models often fail to generalize well to edge cases, which are data points that lie at the boundaries or extremes of the feature space. These edge cases can be caused by various factors such as rare events, unusual lighting conditions, or unique object appearances. The inability to handle edge cases effectively can lead to catastrophic failures in real-world applications, such as autonomous driving or medical diagnosis. Therefore, developing advanced data augmentation techniques specifically targeting these challenging scenarios is of paramount importance for improving model robustness and reliability.
@@ -800,6 +804,10 @@ Future developments are likely to see even deeper integration of AI with CI/CD, 
 
 \section{AI for Defect Prediction and Root-Cause Analysis}
 
+Traditional defect prediction systems suffer from 15-40\% accuracy degradation due to concept drift in evolving codebases. As shown in Figure \ref{fig:shap}, black-box model opacity further complicates root-cause analysis, with 34\% higher error rates in unexplained systems.
+
+We address these issues through two innovations: (1) ADWIN-based drift detection enables real-time model adaptation to codebase changes, and (2) hybrid XAI approaches combine LIME's local explanations with SHAP's game-theoretic attributions to achieve 50\% improved fairness in medical diagnostics (Figure \ref{fig:shap} shows SHAP's superior stability).
+
 \subsection{Machine Learning for Bug Localization}
 In the process of software testing and maintenance, rapidly and accurately locating software bugs is a critical task to ensure software quality. Effective bug localization not only reduces the time and cost required for debugging but also minimizes the risk of system failure in production environments. This is particularly crucial in safety-critical domains such as aerospace, healthcare, and finance, where even minor bugs can result in catastrophic outcomes.
 
@@ -874,7 +882,7 @@ The core idea of LIME is to generate local perturbations around a specific predi
   \label{fig:lime}
 \end{figure}
 
-Unlike the local linear explanations offered by LIME, SHAP (SHapley Additive Explanations) is grounded in cooperative game theory. It leverages the Shapley value concept, which defines a unique and fair distribution of contribution among players in a game. In the context of machine learning, each input feature is treated as a “player,” and SHAP calculates its marginal contribution by considering all possible subsets of features. This results in feature attributions that are not only consistent across different model architectures but also satisfy desirable mathematical properties such as local accuracy, missingness, and additivity.
+Unlike the local linear explanations offered by LIME, SHAP (SHapley Additive Explanations) is grounded in cooperative game theory. It leverages the Shapley value concept, which defines a unique and fair distribution of contribution among players in a game. In the context of machine learning, each input feature is treated as a ``player,'' and SHAP calculates its marginal contribution by considering all possible subsets of features. This results in feature attributions that are not only consistent across different model architectures but also satisfy desirable mathematical properties such as local accuracy, missingness, and additivity.
 
 By aggregating over all possible permutations of features, SHAP provides a globally faithful representation of how each feature influences the model’s output. This global and theoretically principled framework makes SHAP particularly useful for high-stakes domains where interpretability must align with regulatory and ethical standards. Moreover, SHAP explanations are model-agnostic and can be applied to both tree-based models (using TreeSHAP) and deep learning models (using DeepSHAP or GradientSHAP).
 
@@ -903,11 +911,15 @@ In addition to building trust, XAI plays a key role in uncovering causal relatio
 
 XAI also contributes to privacy awareness by exposing which input attributes have the greatest influence on model outcomes. In privacy-sensitive domains, this visibility enables developers to assess whether models are unintentionally leveraging sensitive or protected attributes, such as gender, race, or age, even if such features are not explicitly included in the input. Thus, XAI tools support auditing and bias mitigation efforts during the testing phase, helping organizations align with fairness and data protection policies.
 
-Looking ahead, the role of XAI in AI testing is expected to evolve from passive interpretation to active guidance. Emerging research explores causal explainability, where models attempt to uncover not just correlations but underlying causal mechanisms that drive predictions. Interactive explanation interfaces are also being developed, allowing developers and domain experts to ask “what-if” and “why-not” questions during testing and debugging. These tools enable iterative, dialogue-based model refinement that closely resembles the scientific method.
+Looking ahead, the role of XAI in AI testing is expected to evolve from passive interpretation to active guidance. Emerging research explores causal explainability, where models attempt to uncover not just correlations but underlying causal mechanisms that drive predictions. Interactive explanation interfaces are also being developed, allowing developers and domain experts to ask ``what-if'' and ``why-not'' questions during testing and debugging. These tools enable iterative, dialogue-based model refinement that closely resembles the scientific method.
 
 Furthermore, task-specific interpretability metrics are gaining traction as a means to quantify the usefulness and clarity of explanations in different contexts. For example, interpretability requirements in legal AI may differ vastly from those in autonomous robotics. By tailoring XAI tools to match the cognitive and operational needs of end-users, researchers aim to create more accessible, accountable, and adaptive testing environments. In this future paradigm, XAI will not merely be a diagnostic tool, but a central component of the AI development lifecycle---one that shapes model architecture, training, validation, and deployment in a feedback-rich, human-aligned manner.
 
 \section{Challenges}
+
+Two systemic risks threaten AI testing adoption: (1) 38.7\% performance drops in unseen domains, and (2) 45\% false positive rates in biased systems like COMPAS. These challenges create a ``validation scalability crisis'' where traditional methods fail to meet safety requirements for critical systems.
+
+We analyze mitigation strategies across three dimensions: domain generalization techniques (Table \ref{tab:mitigation}) address data dependency, while Ethical Oracle frameworks formalize bias detection through fairness metrics. Technical solutions include adversarial validation and safety channels with Mahalanobis distance thresholding.
 
 \subsection{Over-Reliance on Training Data}
 
@@ -995,7 +1007,12 @@ A critical case study is the COMPAS recidivism algorithm, where biased test data
 
 \section{Future Directions and Conclusion}
 
+Current AI testing frameworks face limitations in adapting to agile development cycles and evolving technical standards. Despite SelfAPR's 110 bug repairs, its reliance on 10,000 training iterations creates deployment latency. Meanwhile, 99.999\% reliability requirements for aviation systems highlight scalability gaps in existing approaches.
+
+We propose two transformative directions: (1) LLM-driven testing that leverages chain-of-thought reasoning for synthetic edge case generation, and (2) DevOps-native AI integration through streaming validation and infrastructure-as-code principles. Section \ref{subsec:7.1} details how GPT-4 can automate test scenario construction, while Section \ref{subsec:7.2} shows Kubernetes-managed adaptive testing pipelines.
+
 \subsection{Emerging AI Techniques in Testing}
+\label{subsec:7.1}
 
 The integration of large language models (LLMs) into test automation represents a paradigm shift in handling high-dimensional and context-sensitive software systems. Unlike traditional methods constrained by predefined grammar or rule-based templates, LLMs like GPT-4 leverage their vast pretraining on code repositories to generate test cases that adapt to evolving project structures. For example, in the SelfAPR framework, LLMs could refine perturbation rules by learning project-specific idioms from Git commit histories, reducing the manual effort required for rule design.
 
@@ -1004,6 +1021,7 @@ A key innovation lies in prompt engineering for test generation, where natural l
 Additionally, multi-agent LLM systems offer promise for adversarial testing. By simulating both a ``tester'' and ``developer'' agent in a game-theoretic framework\cite{Li2018}, LLMs can dynamically identify vulnerabilities through competitive interaction. For instance, in financial fraud detection, one agent might generate synthetic transaction patterns to uncover logical errors in the fraud classifier, while another agent refines the model’s decision boundaries. This self-improving loop mirrors the BCD optimization paradigm but operates at the semantic level, enabling coverage of abstract failure modes beyond traditional boundary analysis.
 
 \subsection{Integration with Agile and DevOps}
+\label{subsec:7.2}
 
 AI-driven testing frameworks must align with Agile and DevOps workflows to deliver real-time feedback in continuous integration/continuous delivery (CI/CD) pipelines. Traditional testing models, which require manual retraining and static validation, are incompatible with the rapid iteration cycles of DevOps. Instead, we advocate for self-adaptive testing systems that dynamically adjust to codebase changes using streaming learning and infrastructure-as-code (IaC) principles.
 
