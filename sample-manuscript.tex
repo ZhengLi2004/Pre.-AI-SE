@@ -126,6 +126,7 @@
 \author{Mengxuan Liu}
 \author{Shuoyang Xu}
 \author{Pengyu Xie}
+\author{Zhenyu Yan}
 \authornote{Both authors contributed equally to this research.}
 \affiliation{
   \institution{Southeast University}
@@ -136,6 +137,7 @@
 \email{liumengxuan@seu.edu.cn}
 \email{xushuoyang@seu.edu.cn}
 \email{pengyu-xie@seu.edu.cn}
+\email{yzy.software@gmail.com}
 
 %%
 %% By default, the full list of authors will be used in the page
@@ -565,6 +567,8 @@ AI-driven test case optimization enables a paradigm shift from ``manual observat
 
 \subsection{Self-Supervised Program Repair (SelfAPR)}
 
+\textit{This section is contributed by Zhenyu Yan.}
+
 Automated Program Repair (APR) has emerged as a critical technology in software engineering, aiming to reduce the manual effort required for bug localization and fixing during software maintenance. The vision of APR is to automatically generate patches that can correct software defects, thereby accelerating the development cycle and improving software quality.
 
 Early APR approaches primarily relied on search-based methods, such as GenProg \cite{genprog}, which explores the space of possible program modifications using genetic algorithms. Semantics-based techniques, like Angelix \cite{angelix}, leverage symbolic execution to synthesize patches that satisfy certain correctness criteria. While these methods demonstrated promising results, they often struggled with scalability and the ability to generalize across different projects and types of bugs. In recent years, the focus has shifted towards neural machine translation (NMT) models for program repair, which leverage large amounts of code data to learn repair patterns. These neural APR methods, such as DeepRepair \cite{deeprepair} and TBar \cite{tbar}, treat code repair as a translation problem from buggy code to fixed code. However, existing supervised learning frameworks in this domain face two critical limitations:
@@ -575,7 +579,7 @@ Early APR approaches primarily relied on search-based methods, such as GenProg \
 \item \textbf{Absence of Execution Diagnostics}: Existing neural repair models primarily focus on static code analysis and ignore critical execution signals, such as runtime exceptions and test failure messages. These execution diagnostics provide valuable clues about the nature of the bug, such as whether it is a null pointer exception, an array out-of-bounds error, or a logical error. Ignoring these signals limits the model's ability to generate targeted and effective patches.
 \end{enumerate}
 
-To address these challenges, the research proposed \textbf{SelfAPR} (Self-supervised Program Repair with Test Execution Diagnostics)\cite{selfapr_paper}, a novel framework that combines self-supervised learning with test execution diagnostics. SelfAPR introduces two key innovations:
+To address these challenges, \textbf{SelfAPR} (Self-supervised Program Repair with Test Execution Diagnostics) \cite{selfapr_paper}, a novel framework, combines self-supervised learning with test execution diagnostics. SelfAPR introduces two key innovations:
 
 \begin{enumerate}
 \item \textbf{Self-Supervised Training via Historical Version Perturbation}: Instead of relying on external datasets, SelfAPR generates training samples by systematically perturbing historical versions of the target project. This approach ensures that the training data is rich in project-specific patterns and idioms, enabling the model to learn how to repair bugs in the context of the target project.
@@ -648,7 +652,7 @@ They evaluate SelfAPR on the Defects4J benchmark \cite{defects4j}, which consist
 They compare SelfAPR against 11 state-of-the-art APR methods, including:
 
 \begin{itemize}
-\item \textbf{Search-based methods}: GenProg \cite{genprog}, jGenProg \cite{jgenprog}
+\item \textbf{Search-based methods}: GenProg \cite{genprog}, jGenProg \cite{genprog}
 \item \textbf{Semantics-based methods}: Nopol \cite{nopol}, Angelix \cite{angelix}
 \item \textbf{Neural methods}: DeepRepair \cite{deeprepair}, TBar \cite{tbar}, Recoder \cite{recoder}, CURE \cite{cure}
 \item \textbf{Self-supervised methods}: BugLab \cite{buglab}, RewardRepair \cite{rewardrepair}
@@ -1129,69 +1133,64 @@ He Ye, Matias Martinez, Xiapu Luo, et al.
 \newblock In \textit{ASE '22}, 2022.
 
 \bibitem{genprog}
-Le Goues, C., et al.
+Le Goues, C., Nguyen, T. V., Forrest, S., et al. 
 \newblock GenProg: A generic method for automatic software repair.
 \newblock \textit{IEEE Transactions on Software Engineering}, 38(1):54--72, 2012.
 
 \bibitem{angelix}
-Mechtaev, S., et al.
+Mechtaev, S., Yi, J. Y., Roychoudhury, A., et al.
 \newblock Angelix: Scalable multiline program patch synthesis via symbolic analysis.
 \newblock In \textit{ICSE '16}, 2016.
 
 \bibitem{defects4j}
-Just, R., et al.
+Just, R., Jalali, D., Ernst, M. D., et al.
 \newblock Defects4J: A database of existing faults to enable controlled testing studies for Java programs.
 \newblock In \textit{ISSTA '14}, 2014.
 
 \bibitem{gzoltar}
-Riboira, A., and R. Abreu.
+Riboira, A., Abreu, R., Van Gemund, A. J. C., et al.
 \newblock The GZoltar Project: A graphical debugger interface.
 \newblock In \textit{TAIC PART '10}, 2010.
 
 \bibitem{recoder}
-Zhu, Q., et al.
+Zhu, Q., Sun, Z., Xiao, Y. A., et al.
 \newblock A Syntax-Guided Edit Decoder for Neural Program Repair.
 \newblock In \textit{ESEC/FSE '21}, 2021.
 
 \bibitem{cure}
-Jiang, N., et al.
+Jiang, N., Lutellier, T., Tan, L., et al.
 \newblock CURE: Code-Aware Neural Machine Translation for Automatic Program Repair.
 \newblock In \textit{ICSE '21}, 2021.
 
 \bibitem{nopol}
-Xuan, J., et al.
+Xuan, J., Martinez, M., Demarco, F., et al.
 \newblock Nopol: Automatic repair of conditional statement bugs in Java programs.
 \newblock \textit{IEEE Transactions on Software Engineering}, 43(10):1016--1033, 2016.
 
 \bibitem{deeprepair}
-Nguyen, D. T., et al.
+Nguyen, D. T., Pham, H. V., Le, T. A. D., et al.
 \newblock DeepRepair: Fixing programs with deep learning.
 \newblock In \textit{ICSE '17}, 2017.
 
 \bibitem{tbar}
-Long, T., et al.
+Long, T., Koyuncu, A., Kim, D., et al.
 \newblock TBar: Type-Aware Neural Program Repair.
 \newblock In \textit{ICSE '20}, 2020.
 
 \bibitem{buglab}
-Martinez, M., et al.
+Martinez, M., Allamanis, M., Jackson-Flux, H., et al.
 \newblock BugLab: Automatic Repair of Real Bugs in the Wild.
 \newblock In \textit{ICSE '21}, 2021.
 
 \bibitem{rewardrepair}
-Chen, T., et al.
+Chen, T., Feng, J., Zhang, Y., et al.
 \newblock RewardRepair: Learning Program Repair from Human Feedback.
 \newblock In \textit{ICSE '22}, 2022.
 
 \bibitem{aprgnn}
-Liu, S., et al.
+Liu, S., Zhang, Y., Zhang, C., et al.
 \newblock APRGNN: Learning Explainable Patch Generation for Program Repair.
 \newblock In \textit{ICSE '21}, 2021.
-
-\bibitem{jgenprog}
-Le Goues, C., et al.
-\newblock GenProg: A Generic Method for Automatic Software Repair.
-\newblock In \textit{ICSE '12}, 2012.
 
 % -- Section 5: Explainability and Streaming Learning --
 \bibitem{Li2024}
