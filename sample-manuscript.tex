@@ -59,19 +59,20 @@
 %% the commands and values with those provided to you when you
 %% complete the rights form.
 \setcopyright{acmlicensed}
-\copyrightyear{2025}
-\acmYear{2025}
+\copyrightyear{2018}
+\acmYear{2018}
 \acmDOI{XXXXXXX.XXXXXXX}
 %% These commands are for a PROCEEDINGS abstract or paper.
-\acmConference{Unknown}{June 01--13,
-  2025}{Woodstock, NY}
+\acmConference[Conference acronym 'XX]{Make sure to enter the correct
+  conference title from your rights confirmation email}{June 03--05,
+  2018}{Woodstock, NY}
 %%
 %%  Uncomment \acmBooktitle if the title of the proceedings is different
 %%  from ``Proceedings of ...''!
 %%
 %%\acmBooktitle{Woodstock '18: ACM Symposium on Neural Gaze Detection,
 %%  June 03--05, 2018, Woodstock, NY}
-\acmISBN{978-1-4503-XXXX-X/2025/06}
+\acmISBN{978-1-4503-XXXX-X/2018/06}
 
 
 %%
@@ -114,7 +115,7 @@
 %%
 %% The "title" command has an optional parameter,
 %% allowing the author to define a "short title" to be used in page headers.
-\title{AI-Driven Innovations in Software Testing: Automated Test Data Generation, Program Repair, and Defect Prediction}
+\title{The Name of the Title Is Hope}
 
 %%
 %% The "author" command and its associated commands are used to define
@@ -122,15 +123,14 @@
 %% Of note is the shared affiliation of the first two authors, and the
 %% "authornote" and "authornotemark" commands
 %% used to denote shared contribution to the research.
-\author{Zheng Li, Mengxuan Liu}
+\author{Zheng Li,Mengxuan Liu}
 \authornote{Both authors contributed equally to this research.}
 \affiliation{
   \institution{Southeast University}
   \city{Nanjing}
   \country{China}
 }
-\email{LiZheng040910@163.com}
-\email{liumengxuan@seu.edu.cn}
+\email{LiZheng040910@163.com,liumengxuan@seu.edu.cn}
 
 %%
 %% By default, the full list of authors will be used in the page
@@ -138,13 +138,13 @@
 %% other information printed in the page headers. This command allows
 %% the author to define a more concise list
 %% of authors' names for this purpose.
-\renewcommand{\shortauthors}{Li et al.}
+\renewcommand{\shortauthors}{Trovato et al.}
 
 %%
 %% The abstract is a short summary of the work to be presented in the
 %% article.
 \begin{abstract}
-Artificial intelligence (AI) has transformed software testing by addressing critical limitations in test data generation, program repair, and defect prediction. This paper presents three AI-driven innovations: (1) a multi-level data augmentation framework combining domain-style transfer and GANs to improve robustness against distribution shifts (e.g., 29\% gain on PACS dataset), (2) reinforcement learning (RL) with dynamic thresholds for boundary exploration in autonomous systems (85\% defect detection in simulations), and (3) SelfAPR, a self-supervised program repair system leveraging project-specific data and execution diagnostics to fix 110 real-world bugs in Defects4J. Despite these advances, systemic risks persist: generative models propagate dataset biases (e.g., 34\% higher error rates for underrepresented groups), while concept drift in evolving codebases reduces validation efficacy by 15-40\%. To mitigate these, we propose fairness-aware perturbation rules, ADWIN-based drift detection, and ethical oracle frameworks integrating bias metrics into testing pipelines. Experimental results demonstrate that hybrid strategies---combining adversarial simulation, statistical monitoring, and human-in-the-loop oversight---achieve robust validation for high-dimensional systems. We further highlight future directions: LLM-driven edge case generation and DevOps-native AI integration via streaming learning and infrastructure-as-code. This work bridges technical and ethical challenges, positioning AI-assisted testing as a foundation for scalable, trustworthy software systems in safety-critical domains.
+
 \end{abstract}
 
 %%
@@ -184,7 +184,8 @@ Artificial intelligence (AI) has transformed software testing by addressing crit
 %%
 %% Keywords. The author(s) should pick words that accurately describe
 %% the work being presented. Separate the keywords with commas.
-\keywords{Artificial Intelligence in Software Testing, Test Data Generation, Automated Program Repair, Defect Prediction}
+\keywords{Do, Not, Us, This, Code, Put, the, Correct, Terms, for,
+  Your, Paper}
 %%
 %% This command processes the author and affiliation and title
 %% information and builds the first part of the formatted document.
@@ -192,43 +193,56 @@ Artificial intelligence (AI) has transformed software testing by addressing crit
 
 \section{Introduction}
 
-\subsection{Motivation of AI in Software Testing}
+Software testing has long been recognized as a cornerstone of software quality assurance, consuming approximately 40-50\% of development resources in typical software projects. However, the emergence of artificial intelligence (AI) systems in production environments has fundamentally challenged traditional testing paradigms. Unlike conventional software systems with deterministic behavior and well-defined specifications, AI systems exhibit probabilistic decision-making, data-dependent behavior, and emergent properties that cannot be adequately validated using established testing methodologies~\cite{Zhou2024}. This paradigm shift necessitates a comprehensive examination of how AI transforms both the object of testing (AI systems themselves) and the practice of testing (AI as a testing tool).
 
-The rapid proliferation of artificial intelligence systems across critical domains has exposed fundamental limitations in traditional software testing methodologies, creating an urgent need for AI-assisted testing approaches. Recent studies have highlighted the severity of inadequate testing practices in AI systems, with research revealing that generative AI models can exhibit significant bias issues that traditional testing methods fail to detect~\cite{Zhou2024}. Furthermore, Generative Adversarial Networks (GANs) present unique fairness challenges that require specialized validation approaches beyond conventional software testing paradigms~\cite{Kenfack2021}. This concerning trend stems from the systematic underrepresentation of diverse populations in training data, leading to models that perform exceptionally well on majority demographics while failing catastrophically on minority groups. Traditional testing frameworks, designed for deterministic software systems with predictable input-output mappings, prove inadequate when confronted with the probabilistic nature and data-dependent behavior of modern AI systems.
+The integration of AI into software systems has created a dual transformation in the testing landscape. On one hand, AI systems introduce novel failure modes—including adversarial vulnerabilities, distribution shift sensitivity, and algorithmic bias—that traditional testing approaches struggle to detect~\cite{Kenfack2021}. On the other hand, AI techniques offer unprecedented opportunities to enhance testing effectiveness through automated test generation, intelligent test selection, and adaptive testing strategies~\cite{genprog, angelix}. This duality presents both significant challenges and transformative opportunities for the software testing community.
 
-The challenge extends beyond demographic bias to encompass a broader spectrum of AI system vulnerabilities that traditional testing methodologies cannot adequately address. Unlike conventional software where failures typically result from logical errors or boundary condition violations, AI systems exhibit complex failure modes that emerge from the interaction between learned representations and environmental variations. Recent advances in IR-based bug localization and deep learning approaches have shown promise in addressing some of these challenges~\cite{Li2024}, but fundamental gaps remain in our ability to systematically test AI systems. These failure modes include adversarial vulnerabilities, where carefully crafted inputs can cause misclassification with high confidence; distribution shift sensitivity, where performance degrades when operational data differs from training data; and emergent behaviors that arise from complex feature interactions within deep neural networks.
+\subsection{Background and Motivation}
 
-Safety-critical autonomous systems exemplify these challenges, where inadequate testing methodologies have contributed to real-world incidents. The complexity of autonomous vehicle decision-making involves processing high-dimensional sensor data through multiple neural network layers, creating decision boundaries that cannot be systematically explored using traditional equivalence partitioning or boundary value analysis techniques. These incidents demonstrate that conventional testing approaches, which rely on discrete test cases and deterministic verification, cannot capture the continuous, high-dimensional decision spaces inherent in neural network architectures.
+The rapid adoption of AI systems across safety-critical domains has exposed critical gaps in current testing practices. Recent incidents involving autonomous vehicles, medical diagnosis systems, and facial recognition technologies demonstrate the severe consequences of inadequate AI system validation. These failures stem from fundamental limitations of traditional testing methodologies when applied to AI systems. Conventional approaches such as equivalence partitioning and boundary value analysis~\cite{Guo2024} assume discrete, well-defined input domains and deterministic system behavior—assumptions that do not hold for machine learning models operating in continuous, high-dimensional spaces.
 
-Furthermore, the emergence of generative AI systems in production environments has introduced unprecedented categories of failures that existing testing paradigms cannot anticipate or prevent. Large language models, for instance, can generate outputs that appear syntactically correct but contain factual inaccuracies, exhibit harmful biases, or produce inconsistent responses to semantically similar inputs. The bias issues in generative AI systems represent a particularly challenging problem that requires new testing methodologies to address~\cite{Zhou2024}. These failure modes cannot be detected through traditional functional testing because they require semantic understanding and contextual reasoning capabilities that exceed the scope of conventional test oracles.
+The challenge is further compounded by the data-dependent nature of AI systems. Unlike traditional software where behavior is explicitly programmed, AI systems learn their functionality from training data, making them susceptible to biases and edge cases not represented in their training sets. Studies have shown that generative AI models can exhibit significant fairness issues~\cite{Zhou2024}, while Generative Adversarial Networks (GANs) present unique validation challenges that require specialized testing approaches~\cite{Kenfack2021}. These incidents exemplify how AI systems can fail catastrophically when exposed to adversarial inputs, highlighting the inadequacy of traditional testing oracles for AI systems.
 
-Current empirical evidence reveals a substantial coverage gap in AI system testing, with traditional software testing methodologies achieving limited coverage of critical edge cases in AI systems compared to conventional software systems. This coverage gap represents not merely a quantitative deficiency but a qualitative failure to address the fundamental characteristics of AI systems: their susceptibility to adversarial inputs, sensitivity to data distribution shifts, emergent behaviors arising from complex feature interactions, and the absence of clear specifications for expected behavior across all possible input scenarios. Research in adaptive random testing has shown some promise in improving coverage~\cite{Chen2004}, but significant challenges remain in systematically exploring the vast input spaces characteristic of AI systems.
+Simultaneously, the complexity of modern software systems has outpaced the scalability of manual testing approaches. Software systems today integrate multiple AI components, operate in dynamic environments, and exhibit behaviors that emerge from complex component interactions. Traditional testing methodologies, which rely heavily on manual test case design and expert domain knowledge, cannot adequately address the scale and complexity of these systems. This scalability crisis has created demand for automated, intelligent testing approaches that can systematically explore vast input spaces and adapt to evolving system behaviors.
 
-The theoretical significance of this testing crisis extends beyond immediate practical concerns to fundamental questions about AI system reliability and trustworthiness. Traditional software verification relies on formal specifications and mathematical proofs of correctness, but AI systems learn their behavior from data rather than explicit programming, making formal verification approaches largely inapplicable. This paradigm shift necessitates the development of new testing frameworks that can systematically explore vast input spaces, generate synthetic edge cases that stress-test learned behaviors, quantify model robustness across diverse operational domains, and provide probabilistic rather than deterministic guarantees of system reliability.
+\subsection{Current Trends and Challenges}
 
-\subsection{AI as a Tool for Testing Traditional Systems}
+Contemporary research in AI-enhanced testing has converged around several key directions. First, synthetic test data generation using generative models has shown promise in addressing coverage limitations of traditional testing. Techniques including GANs, Variational Autoencoders, and large language models can generate diverse, realistic test inputs that systematically explore edge cases difficult to obtain through conventional means. However, ensuring the fairness and representativeness of synthetic data remains a significant challenge~\cite{Kenfack2021}.
 
-While AI systems present novel testing challenges, artificial intelligence techniques simultaneously offer transformative solutions for enhancing the testing of both traditional and AI-powered software systems. The fundamental paradigm shift involves leveraging machine learning algorithms to automate test case generation, optimize test selection and prioritization, predict software defects with unprecedented precision, and adapt testing strategies based on continuous feedback from system behavior and execution patterns. Traditional software testing relies heavily on manual test case design, expert domain knowledge, and heuristic-based approaches such as boundary value analysis and equivalence partitioning, methodologies that become increasingly inadequate as software complexity grows exponentially and system interdependencies multiply. Recent advances in optimal test case generation for boundary value analysis have shown significant improvements over traditional approaches~\cite{Guo2024}.
+Second, search-based software testing has evolved to incorporate machine learning techniques for intelligent test case generation and optimization. Reinforcement learning approaches, in particular, have demonstrated effectiveness in dynamic test exploration, where testing agents learn to navigate complex system behaviors and approach failure boundaries through iterative interaction. Game-theoretic modeling approaches have shown promise in verification and validation of autonomous systems~\cite{Li2018}, providing systematic frameworks for testing adversarial scenarios.
 
-The application of generative artificial intelligence techniques, particularly Generative Adversarial Networks (GANs), Variational Autoencoders (VAEs), and large language models, has demonstrated remarkable capability in synthetic test data generation, addressing the perennial challenge of insufficient test coverage due to limited availability of real-world edge case data. However, the fairness and bias issues inherent in GANs must be carefully considered when applying these techniques to test data generation~\cite{Kenfack2021}. These generative approaches can create vast quantities of diverse, realistic test inputs that systematically explore regions of the input space that would be prohibitively expensive or dangerous to collect through traditional means. Recent experimental studies indicate that AI-generated test datasets can improve edge case detection rates significantly compared to manually crafted test suites, while simultaneously reducing test development time and associated costs.
+Third, the integration of explainable AI (XAI) techniques into testing workflows has emerged as a critical research direction. Tools such as LIME and SHAP enable testers to understand not only whether systems fail but why they fail, providing actionable insights for system improvement~\cite{Ribeiro2016, Lundberg2017}. This interpretability is particularly crucial for debugging AI systems where traditional debugging approaches prove inadequate.
 
-Synthetic test data generation proves particularly valuable in domains where collecting comprehensive real-world test data presents significant challenges. In automotive software testing, for instance, GANs can generate thousands of synthetic driving scenarios including rare weather conditions, unusual pedestrian behaviors, complex traffic patterns, and near-collision events without requiring actual dangerous situations or expensive field testing. Game theoretic modeling approaches have shown promise in verification and validation of autonomous vehicle control systems, providing systematic frameworks for testing vehicle interactions~\cite{Li2018}. Similarly, in financial software systems, generative models can create synthetic transaction patterns that include rare fraud scenarios, market volatility conditions, and regulatory edge cases that occur infrequently in production but represent critical system vulnerabilities.
+Despite these advances, several fundamental challenges persist. The concept drift problem affects deployed AI systems when operational data distributions differ from training data, leading to silent performance degradation. Adaptive windowing techniques such as ADWIN have been proposed to detect such drift~\cite{Bifet2007}, but comprehensive solutions for drift-aware testing remain elusive. Additionally, the over-reliance on training data creates systematic risks where validation approaches may fail to guarantee robustness in novel environments.
 
-Reinforcement learning approaches have proven particularly effective in dynamic test exploration and adaptive test case generation, where the testing agent learns to navigate complex system behaviors and systematically approach failure boundaries through iterative interaction with the system under test. The theoretical foundation of this approach lies in formulating software testing as an optimization problem, where the objective function combines multiple criteria: minimizing the distance between test cases and critical system boundaries, maximizing coverage of potential failure modes, and optimizing resource utilization across the testing process. Advanced statistical methods, including Metropolis-Hastings algorithms, have been adapted for intelligent test case sampling and exploration~\cite{Chib1995}.
+Ethical and legal considerations present another layer of complexity. AI systems trained on biased data can perpetuate or amplify societal inequities, creating legal liabilities and ethical concerns that traditional testing frameworks do not address~\cite{Zhou2024}. Biased training data can lead to discriminatory outcomes, highlighting the need for fairness-aware testing methodologies.
 
-Experimental results from boundary coverage distance (BCD) optimization and mutation testing frameworks demonstrate that reinforcement learning-based test case generation achieves substantially higher defect detection rates compared to random testing approaches or traditional systematic testing methods. This improvement stems from the agent's ability to learn from previous test executions, build internal models of system behavior, and intelligently guide exploration toward regions of the input space most likely to reveal defects or trigger unexpected behaviors.
+\subsection{Scope and Objectives}
 
-The integration of explainable AI (XAI) techniques into testing frameworks represents another significant advancement, enabling testers to understand not only whether a system fails under specific conditions but also why it fails, which components contribute most significantly to the failure, and how similar failures might be prevented or detected earlier in the development process. LIME (Local Interpretable Model-agnostic Explanations) and SHAP (SHapley Additive exPlanations) based analysis tools can automatically generate comprehensive diagnostic reports that trace failure paths through complex software architectures, identify root causes of defects, and provide actionable insights for system improvement~\cite{Ribeiro2016,Lundberg2017}.
+This survey aims to provide a comprehensive analysis of the intersection between artificial intelligence and software testing, addressing two complementary perspectives: testing AI systems and using AI for testing. Our scope encompasses both theoretical foundations and practical applications, covering recent advances in automated test generation, AI system validation, explainable testing, and emerging challenges in AI testing.
 
-Machine learning-based test oracle generation addresses one of the most challenging aspects of software testing: determining whether observed system behavior constitutes correct or incorrect functionality. Traditional test oracles rely on explicit expected outputs or behavioral specifications, but many modern software systems, particularly those involving AI components, exhibit behaviors that are difficult to specify formally. ML-based oracles can learn expected behavior patterns from training data, detect anomalous behaviors that deviate from learned norms, and provide probabilistic assessments of output correctness rather than binary pass/fail determinations.
+Specifically, this survey addresses the following key questions: (1) How do traditional testing methodologies need to be adapted for AI systems? (2) What novel testing approaches are required to address AI-specific failure modes? (3) How can AI techniques enhance the effectiveness and efficiency of software testing? (4) What are the current limitations and future research directions in AI-enhanced testing?
 
-The theoretical significance of AI-assisted testing extends beyond mere efficiency gains to fundamental improvements in software reliability assurance. By systematically identifying and addressing entire classes of defects that would remain hidden under conventional testing approaches, AI-enhanced testing methodologies contribute to the development of more robust, reliable, and trustworthy software systems across all application domains. This transformation is particularly crucial as software systems become increasingly complex, interconnected, and deployed in safety-critical environments where failures can have severe consequences for human safety, economic stability, and societal well-being.
+We focus on testing methodologies applicable to machine learning systems, including deep neural networks, ensemble methods, and generative models. While we acknowledge the broader scope of AI systems, our analysis concentrates on data-driven AI approaches that have become prevalent in modern software systems. The survey targets researchers and practitioners seeking to understand the current state of AI testing, identify promising research directions, and apply AI-enhanced testing techniques in practice.
 
+\subsection{Contributions}
+
+This survey makes several key contributions to the understanding of AI's role in software testing:
+
+\textbf{Comprehensive Framework:} We present a unified framework that systematically categorizes AI testing approaches, distinguishing between testing AI systems (validation of AI components) and AI-assisted testing (using AI to enhance testing processes). This framework provides clarity in a field where terminology and scope often overlap.
+
+\textbf{Technical Depth:} Unlike previous surveys that focus primarily on high-level concepts, we provide detailed technical analysis of key algorithms and methodologies, including boundary coverage distance optimization, adaptive windowing for drift detection, and explainable AI techniques for test debugging. Mathematical formulations and algorithmic details are provided where appropriate.
+
+\textbf{Practical Insights:} We synthesize lessons learned from real-world deployments and case studies, providing actionable guidance for practitioners. This includes analysis of failure modes in production AI systems, mitigation strategies for common challenges, and recommendations for integrating AI testing approaches into existing development workflows~\cite{defects4j, selfapr_paper}.
+
+\textbf{Future Roadmap:} We identify emerging research directions and open challenges, including the integration of large language models for test generation, ethical considerations in AI testing, and the evolution of testing practices in continuous deployment environments.
+
+\textbf{Interdisciplinary Perspective:} We bridge multiple research communities, including software engineering, machine learning, and human-computer interaction, providing insights relevant to diverse stakeholders involved in AI system development and validation~\cite{Li2024}.
+
+\subsection{Organization}
+
+The remainder of this paper is organized as follows. Section~2 establishes the theoretical foundations, defining key concepts and terminology used throughout the survey. Section~3 examines AI-assisted testing approaches, covering automated test generation, search-based testing, and synthetic data generation techniques. Section~4 focuses on testing AI systems, addressing validation challenges specific to machine learning models, including adversarial testing, bias detection, and robustness evaluation. Section~5 explores advanced topics including drift detection, explainable AI in testing, and emerging applications of large language models. Section~6 discusses current challenges and limitations, including data dependency issues, ethical considerations, and scalability concerns. Section~7 concludes with future research directions and recommendations for the research community. Throughout the survey, we provide concrete examples, case studies, and practical guidance to bridge the gap between research advances and industrial practice.
 \section{AI-Driven Test Data Generation}
-
-Traditional test data generation struggles with two critical limitations: (1) insufficient coverage of edge cases that dominate real-world failure scenarios, and (2) reliance on manual curation for synthetic data creation. As shown in Table \ref{tab:aug_performance}, conventional methods on the PACS dataset achieve only 64.2\% accuracy for ``Art'' samples and 58.7\% for ``Cartoon'' domains, highlighting gaps in handling distribution shifts.
-
-This section systematically addresses these challenges through two complementary approaches. First, we propose a multi-level data augmentation framework that integrates domain-level style transfer, image-level transformations, and feature-level interpolation to bridge distributional gaps. Second, we introduce generative AI techniques like GANs to automate synthetic data creation while addressing bias risks through fairness-aware perturbation rules (Table \ref{tab:tay-case} demonstrates the critical need for bias mitigation).
 
 \subsection{Data Augmentation for Edge Cases}
 \subsubsection{Introduction}
@@ -245,7 +259,7 @@ Third, feature-level augmentation manipulates intermediate feature maps through 
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=0.8\linewidth]{picture/2.1.pdf}
+\includegraphics[width=0.8\linewidth]{picture/2.1.png}
 \caption{Three-level data augmentation framework for domain generalization, demonstrating (A) domain mixing via CycleGAN, (B) image transformations with RandAugment, and © feature space interpolation}
 \label{fig:augmentation_framework}
 \end{figure}
@@ -716,7 +730,7 @@ Jenkins, as a widely used CI/CD tool, can be effectively integrated with AI to c
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.5\textwidth]{picture/jenkins+ai+cursor.pdf}
+  \includegraphics[width=0.5\textwidth]{picture/jenkins+ai+cursor.png}
   \caption{Output of the ADWIN algorithm illustrating abrupt concept drift. When the average error changes significantly, ADWIN shrinks the window and triggers model adjustment. Adapted from Bifet and Gavaldà~\cite{Bifet2007}.}
   \label{fig:adwin}
 \end{figure}
@@ -831,10 +845,6 @@ Future developments are likely to see even deeper integration of AI with CI/CD, 
 
 \section{AI for Defect Prediction and Root-Cause Analysis}
 
-Traditional defect prediction systems suffer from 15-40\% accuracy degradation due to concept drift in evolving codebases. As shown in Figure \ref{fig:shap}, black-box model opacity further complicates root-cause analysis, with 34\% higher error rates in unexplained systems.
-
-We address these issues through two innovations: (1) ADWIN-based drift detection enables real-time model adaptation to codebase changes, and (2) hybrid XAI approaches combine LIME's local explanations with SHAP's game-theoretic attributions to achieve 50\% improved fairness in medical diagnostics (Figure \ref{fig:shap} shows SHAP's superior stability).
-
 \subsection{Machine Learning for Bug Localization}
 In the process of software testing and maintenance, rapidly and accurately locating software bugs is a critical task to ensure software quality. Effective bug localization not only reduces the time and cost required for debugging but also minimizes the risk of system failure in production environments. This is particularly crucial in safety-critical domains such as aerospace, healthcare, and finance, where even minor bugs can result in catastrophic outcomes.
 
@@ -848,7 +858,7 @@ For source code, structural features such as Abstract Syntax Trees (ASTs), Contr
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.85\textwidth]{picture/5.1fig1.pdf}
+  \includegraphics[width=0.85\textwidth]{picture/5.1fig1.png}
   \caption{Architecture of a machine learning-based bug localization framework. The system collects predicate information during execution and learns cause-effect chains using statistical models. Adapted from Jiang and Su~\cite{Li2024}.}
   \label{fig:framework}
 \end{figure}
@@ -869,7 +879,7 @@ This formulation ensures that the detection is statistically sound, providing pr
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.5\textwidth]{picture/5.1fig2.pdf}
+  \includegraphics[width=0.5\textwidth]{picture/5.1fig2.png}
   \caption{Output of the ADWIN algorithm illustrating abrupt concept drift. When the average error changes significantly, ADWIN shrinks the window and triggers model adjustment. Adapted from Bifet and Gavaldà~\cite{Bifet2007}.}
   \label{fig:adwin}
 \end{figure}
@@ -904,12 +914,12 @@ The core idea of LIME is to generate local perturbations around a specific predi
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.6\linewidth]{picture/5.2fig1.pdf}
+  \includegraphics[width=0.6\linewidth]{picture/5.2fig1.png}
   \caption{LIME explanation example. The red cross marks the instance being explained. The background colors represent the black-box model’s decision surface, and the dashed line shows the linear surrogate model used for local interpretation~\cite{Ribeiro2016}.}
   \label{fig:lime}
 \end{figure}
 
-Unlike the local linear explanations offered by LIME, SHAP (SHapley Additive Explanations) is grounded in cooperative game theory. It leverages the Shapley value concept, which defines a unique and fair distribution of contribution among players in a game. In the context of machine learning, each input feature is treated as a ``player,'' and SHAP calculates its marginal contribution by considering all possible subsets of features. This results in feature attributions that are not only consistent across different model architectures but also satisfy desirable mathematical properties such as local accuracy, missingness, and additivity.
+Unlike the local linear explanations offered by LIME, SHAP (SHapley Additive Explanations) is grounded in cooperative game theory. It leverages the Shapley value concept, which defines a unique and fair distribution of contribution among players in a game. In the context of machine learning, each input feature is treated as a “player,” and SHAP calculates its marginal contribution by considering all possible subsets of features. This results in feature attributions that are not only consistent across different model architectures but also satisfy desirable mathematical properties such as local accuracy, missingness, and additivity.
 
 By aggregating over all possible permutations of features, SHAP provides a globally faithful representation of how each feature influences the model’s output. This global and theoretically principled framework makes SHAP particularly useful for high-stakes domains where interpretability must align with regulatory and ethical standards. Moreover, SHAP explanations are model-agnostic and can be applied to both tree-based models (using TreeSHAP) and deep learning models (using DeepSHAP or GradientSHAP).
 
@@ -921,7 +931,7 @@ More importantly, this process led to a notable improvement in user trust. Clini
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.85\linewidth]{picture/5.2fig2.pdf}
+  \includegraphics[width=0.85\linewidth]{picture/5.2fig2.png}
   \caption{Comparison of SHAP, Shapley sampling, and LIME. SHAP provides more stable and accurate feature importance estimates relative to the true Shapley value~\cite{Lundberg2017}.}
   \label{fig:shap}
 \end{figure}
@@ -938,15 +948,11 @@ In addition to building trust, XAI plays a key role in uncovering causal relatio
 
 XAI also contributes to privacy awareness by exposing which input attributes have the greatest influence on model outcomes. In privacy-sensitive domains, this visibility enables developers to assess whether models are unintentionally leveraging sensitive or protected attributes, such as gender, race, or age, even if such features are not explicitly included in the input. Thus, XAI tools support auditing and bias mitigation efforts during the testing phase, helping organizations align with fairness and data protection policies.
 
-Looking ahead, the role of XAI in AI testing is expected to evolve from passive interpretation to active guidance. Emerging research explores causal explainability, where models attempt to uncover not just correlations but underlying causal mechanisms that drive predictions. Interactive explanation interfaces are also being developed, allowing developers and domain experts to ask ``what-if'' and ``why-not'' questions during testing and debugging. These tools enable iterative, dialogue-based model refinement that closely resembles the scientific method.
+Looking ahead, the role of XAI in AI testing is expected to evolve from passive interpretation to active guidance. Emerging research explores causal explainability, where models attempt to uncover not just correlations but underlying causal mechanisms that drive predictions. Interactive explanation interfaces are also being developed, allowing developers and domain experts to ask “what-if” and “why-not” questions during testing and debugging. These tools enable iterative, dialogue-based model refinement that closely resembles the scientific method.
 
 Furthermore, task-specific interpretability metrics are gaining traction as a means to quantify the usefulness and clarity of explanations in different contexts. For example, interpretability requirements in legal AI may differ vastly from those in autonomous robotics. By tailoring XAI tools to match the cognitive and operational needs of end-users, researchers aim to create more accessible, accountable, and adaptive testing environments. In this future paradigm, XAI will not merely be a diagnostic tool, but a central component of the AI development lifecycle---one that shapes model architecture, training, validation, and deployment in a feedback-rich, human-aligned manner.
 
 \section{Challenges}
-
-Two systemic risks threaten AI testing adoption: (1) 38.7\% performance drops in unseen domains, and (2) 45\% false positive rates in biased systems like COMPAS. These challenges create a ``validation scalability crisis'' where traditional methods fail to meet safety requirements for critical systems.
-
-We analyze mitigation strategies across three dimensions: domain generalization techniques (Table \ref{tab:mitigation}) address data dependency, while Ethical Oracle frameworks formalize bias detection through fairness metrics. Technical solutions include adversarial validation and safety channels with Mahalanobis distance thresholding.
 
 \subsection{Over-Reliance on Training Data}
 
@@ -1034,12 +1040,7 @@ A critical case study is the COMPAS recidivism algorithm, where biased test data
 
 \section{Future Directions and Conclusion}
 
-Current AI testing frameworks face limitations in adapting to agile development cycles and evolving technical standards. Despite SelfAPR's 110 bug repairs, its reliance on 10,000 training iterations creates deployment latency. Meanwhile, 99.999\% reliability requirements for aviation systems highlight scalability gaps in existing approaches.
-
-We propose two transformative directions: (1) LLM-driven testing that leverages chain-of-thought reasoning for synthetic edge case generation, and (2) DevOps-native AI integration through streaming validation and infrastructure-as-code principles. Section \ref{subsec:7.1} details how GPT-4 can automate test scenario construction, while Section \ref{subsec:7.2} shows Kubernetes-managed adaptive testing pipelines.
-
 \subsection{Emerging AI Techniques in Testing}
-\label{subsec:7.1}
 
 The integration of large language models (LLMs) into test automation represents a paradigm shift in handling high-dimensional and context-sensitive software systems. Unlike traditional methods constrained by predefined grammar or rule-based templates, LLMs like GPT-4 leverage their vast pretraining on code repositories to generate test cases that adapt to evolving project structures. For example, in the SelfAPR framework, LLMs could refine perturbation rules by learning project-specific idioms from Git commit histories, reducing the manual effort required for rule design.
 
@@ -1048,7 +1049,6 @@ A key innovation lies in prompt engineering for test generation, where natural l
 Additionally, multi-agent LLM systems offer promise for adversarial testing. By simulating both a ``tester'' and ``developer'' agent in a game-theoretic framework\cite{Li2018}, LLMs can dynamically identify vulnerabilities through competitive interaction. For instance, in financial fraud detection, one agent might generate synthetic transaction patterns to uncover logical errors in the fraud classifier, while another agent refines the model’s decision boundaries. This self-improving loop mirrors the BCD optimization paradigm but operates at the semantic level, enabling coverage of abstract failure modes beyond traditional boundary analysis.
 
 \subsection{Integration with Agile and DevOps}
-\label{subsec:7.2}
 
 AI-driven testing frameworks must align with Agile and DevOps workflows to deliver real-time feedback in continuous integration/continuous delivery (CI/CD) pipelines. Traditional testing models, which require manual retraining and static validation, are incompatible with the rapid iteration cycles of DevOps. Instead, we advocate for self-adaptive testing systems that dynamically adjust to codebase changes using streaming learning and infrastructure-as-code (IaC) principles.
 
