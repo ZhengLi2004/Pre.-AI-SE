@@ -981,7 +981,7 @@ We analyze mitigation strategies across three dimensions: domain generalization 
 \subsubsection{Systemic Risks from Data Dependencies}
 \mbox{}\\
 \vspace{0em}
-The validation of AI systems faces fundamental challenges due to their inherent dependence on training data. This dependency creates systemic risks manifested in two primary dimensions: \textit{static data bias} and \textit{dynamic concept drift}. The Microsoft Tay chatbot incident (2016) exemplifies catastrophic failure caused by data dependency. Designed as an interactive learning agent, Tay rapidly adopted offensive language patterns after exposure to malicious user inputs, demonstrating how training data directly dictates system behavior. This case underscores a critical vulnerability: AI systems inherently amplify biases and anomalies present in their training data .
+The validation of AI systems faces fundamental challenges due to their inherent dependence on training data. This dependency creates systemic risks manifested in two primary dimensions: \textit{static data bias} and \textit{dynamic concept drift}. The Microsoft Tay chatbot incident (2016) exemplifies catastrophic failure caused by data dependency. Designed as an interactive learning agent, Tay rapidly adopted offensive language patterns after exposure to malicious user inputs, demonstrating how training data directly dictates system behavior\cite{tayfailure}. This case underscores a critical vulnerability: AI systems inherently amplify biases and anomalies present in their training data\cite{gendershades} .
 
 Additional case studies highlight similar risks:
 \begin{itemize}
@@ -1227,6 +1227,18 @@ Ribeiro, M. T., Singh, S., \& Guestrin, C.
 Lundberg, S. M., \& Lee, S.-I.
 \newblock A unified approach to interpreting model predictions.
 \newblock \textit{Advances in Neural Information Processing Systems}, 30:4765--4774, 2017.
+
+\bibitem{tayfailure}
+Bitra, S.K.
+\newblock Technical Analysis: The Downfall of Microsoft's AI Chatbot Tay.
+\newblock \textit{European Journal of Computer Science and Information Technology}, 13(17):1--11, 2025.
+
+
+\bibitem{gendershades}
+Buolamwini, J., Gebru, T.
+\newblock Gender Shades: Intersectional Accuracy Disparities in Commercial Gender Classification.
+\newblock In \textit{Proceedings of the Conference on Fairness, Accountability, and Transparency}, pp. 77-91. PMLR, 2018.
+
 
 \end{thebibliography}
 
