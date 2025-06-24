@@ -717,26 +717,75 @@ AI-Driven CI/CD integration represents a transformative shift in software develo
 AI brings significant advancements to the CI/CD process through two primary mechanisms: automated test case generation and intelligent deployment strategies.
 
 \paragraph{Automated Test Case Generation}
-AI can generate comprehensive and accurate test cases from natural language requirements, significantly reducing the manual effort required for test script writing. For instance, tools like ScriptEcho and Kimi can analyze requirement documents and automatically produce Pytest test scripts that cover various scenarios, including boundary conditions and equivalence classes.
+Artificial Intelligence (AI) has revolutionized test case generation by enabling automated creation of comprehensive, context-aware test suites from diverse input sources. Leveraging machine learning (ML) and natural language processing (NLP), AI-driven frameworks now facilitate end-to-end test case generation, spanning requirement analysis, scenario design, and script generation. For instance, ML models analyze code structures, historical defect patterns, and runtime behaviors to prioritize high-risk test scenarios, while NLP engines parse unstructured requirements to extract functional specifications. Tools like \textit{Test.ai} and \textit{Functionize} exemplify this paradigm, using deep learning to automate test case generation for complex systems, including edge cases and dynamic user interactions.
 
-The process involves:
+The generative process unfolds through a multi-stage pipeline:
 \begin{enumerate}
-    \item \textbf{NLP Analysis:} AI tools parse requirement documents to extract key functional points.
-    \item \textbf{Pattern Recognition:} Based on historical data and machine learning models, AI identifies common testing patterns.
-    \item \textbf{Test Case Generation:} AI creates test scripts that are then integrated into the CI/CD pipeline.
+\item \textbf{Requirement Engineering with NLP:} AI tools employ syntactic parsing and semantic understanding to extract atomic testable units from requirement documents. This involves identifying \textit{preconditions}, \textit{action sequences}, and \textit{expected outcomes} using techniques like named entity recognition (NER) and dependency parsing. For example, an NLP engine might transform the sentence \textit{"The system must validate credit card numbers per Luhn algorithm"} into test cases covering valid/invalid formats, boundary lengths, and checksum failures.
+\item \textbf{ML-Driven Scenario Enumeration:} Machine learning models, trained on historical test data, generate combinatorial test scenarios by predicting defect-prone code paths. Reinforcement learning (RL) agents can explore state spaces to identify optimal test sequences, while supervised models classify requirements into test categories (e.g., unit, integration). Tools like \textit{Sapienz} use Markov chain models to generate test cases that maximize code coverage while minimizing redundancy.
+\item \textbf{Code Generation and Adaptation:} AI converts abstract test scenarios into executable scripts by leveraging template-based code synthesis or neural code generation. For instance, \textit{Applitools} generates visual testing scripts by combining image recognition with UI element locators, while \textit{Testim.io} employs self-healing mechanisms to adapt scripts to UI changes. This process often includes dynamic binding to testing frameworks (e.g., Selenium, JUnit) and integration with CI/CD pipelines.
+\item \textbf{Test Suite Optimization:} AI refines generated test suites through techniques like \textit{mutation testing} (e.g., \textit{Stryker}) to evaluate fault detection capability, and \textit{test case prioritization} based on risk metrics (e.g., code change impact, historical failure rates). This optimization reduces test execution time by up to 40 percent while maintaining coverage.
 \end{enumerate}
 
-The generated test cases can be further validated for accuracy using natural language processing techniques to ensure they align with the original requirements.
+Validation of generated test cases occurs through dual mechanisms: \textit{requirement traceability} (ensuring each test case maps to specified functional points via NLP-based semantic matching) and \textit{outcome prediction} (using ML models to forecast expected results and detect anomalies). As demonstrated in Microsoft's AI-driven testing for Windows OS, this approach has substantially reduced testing cycles while improving defect detection rates. However, challenges remain in addressing \textit{model bias} (e.g., overfitting to historical data) and \textit{legacy system integration}, necessitating ongoing research in transfer learning and hybrid human-AI validation frameworks 
 
 \paragraph{Intelligent Deployment Strategies}
-AI enables the selection of optimal deployment strategies based on real-time analysis of system behavior, historical performance data, and current load conditions. Common strategies include:
+
+AI-powered intelligent deployment strategies in software radar systems integrate evolutionary computation and adaptive optimization to address complex resource allocation challenges. The proposed approach in this paper leverages an improved genetic algorithm (GA), a prominent AI technique, to dynamically optimize component deployment for load balancing and resource efficiency.
+
+Genetic algorithms, as a subset of AI's evolutionary computation, simulate natural selection processes to iteratively refine deployment solutions. The key AI-driven components of the strategy include:
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{Pre.-AI-SE-main/picture/develop1.jpeg}
+  \caption{Genetic algorithms}
+  \label{fig:adwin}
+\end{figure}
+
 \begin{itemize}
-    \item Blue-Green Deployment
-    \item Canary Deployment
-    \item A/B Testing
+\item \textbf{Adaptive Chromosome Encoding}: Representing deployment schemes as tree-structured chromosomes, where each node denotes server-component mappings. This encoding enables AI to model hierarchical dependencies between software components (e.g., primary, secondary, tertiary levels) and physical resource constraints.
+
+\item \textbf {Multi-objective Fitness Function}: Integrating two AI-derived metrics:
+\begin {itemize}
+\item Standard deviation of server resource utilization (to ensure load balance)
+\item Average load threshold.
+\end {itemize}
+This dual-criteria mechanism allows the AI to prioritize both balance and resource sustainability, avoiding overloading or underutilization.
+
+\item \textbf{Optimized Genetic Operations}:
+\begin{itemize}
+\item \textbf{Population Initialization}: Incorporating MinMin/Max-Min algorithms to filter invalid solutions (e.g., empty servers or overloaded nodes).
+\item \textbf{Adaptive Crossover/Mutation}: Dynamically adjusting genetic operators based on convergence rates, reducing computational complexity from 8 30to feasible scales.
 \end{itemize}
 
-AI evaluates factors such as code change complexity, risk level, and system performance to dynamically choose the most appropriate deployment strategy. Additionally, AI can monitor production systems in real-time and trigger automatic rollbacks if performance degrades below predefined thresholds.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{Pre.-AI-SE-main/picture/develop2.jpeg}
+  \caption{Genetic algorithms output visualization}
+  \label{fig:adwin}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{Pre.-AI-SE-main/picture/develop3.jpeg}
+  \caption{Genetic algorithms comprae}
+  \label{fig:adwin}
+\end{figure}
+
+\item \textbf{Intelligent Termination Condition}: Employing gamma distribution analysis to terminate iterations when solution convergence is achieved (Fig. 4), reducing unnecessary computations by 20 percent compared to traditional GAs.
+\end{itemize}
+
+\textit{AI-Enhanced Scenarios Beyond the Paper}:
+\begin{itemize}
+\item \textbf{Reinforcement Learning Integration}: Future work could combine the GA with Q-learning to enable real-time adjustment of deployment strategies based on streaming performance data (e.g., dynamic resource spikes in radar signal processing).
+
+\item \textbf{Neural Network-based Prediction}: Using LSTM networks to forecast component resource demands, allowing proactive deployment adjustments before load peaks (e.g., anticipating high GPU usage during radar data clustering).
+
+\item \textbf{AutoML for Parameter Tuning}: Automatically optimizing GA parameters (crossover rate, mutation rate) via Bayesian optimization, as demonstrated in the paper's simulation with 60percent crossover and 1% mutation rates (Section IV).
+\end{itemize}
+
+
+Simulation results (Fig. 5) validate that the AI-driven strategy reduces server load variance by 37% and improves resource utilization by 22% compared to traditional GAs. The execution time of 15.29s showcases the efficiency of AI in handling complex deployment landscapes, where manual optimization is infeasible.
 
 \subsubsection{Jenkins Integration with AI}
 
@@ -745,7 +794,7 @@ Jenkins, as a widely used CI/CD tool, can be effectively integrated with AI to c
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.8\textwidth]{picture/jenkins+ai+cursor.pdf}
-  \caption{Output of the ADWIN algorithm illustrating abrupt concept drift. When the average error changes significantly, ADWIN shrinks the window and triggers model adjustment. Adapted from Bifet and Gavaldà~\cite{Bifet2007}.}
+  \caption{Output of the ADWIN algorithm illustrating abrupt concept drift. When the average error changes significantly, ADWIN shrinks the window and triggers model adjustment. Adapted from Bifet and Gavaldà.}
   \label{fig:adwin}
 \end{figure}
 
@@ -759,25 +808,6 @@ The integration workflow includes:
 
 This approach reduces redundant testing and accelerates issue detection, as shown in Fig.~\ref{fig:adwin} for adaptive model updates.
 
-\subsubsection{AI-Driven Deployment Strategies}
-
-AI enhances deployment strategies by introducing **risk-aware decision-making**. Instead of fixed strategies (e.g., blue-green or canary), AI evaluates:
-\begin{itemize}
-    \item Code change complexity
-    \item Historical failure rates
-    \item System load and resource availability
-\end{itemize}
-
-A typical decision flow involves:
-\begin{itemize}
-    \item \textbf{Risk Scoring}: AI models assess the risk of deploying new code.
-    \item \textbf{Strategy Selection}: High-risk changes trigger conservative strategies (e.g., canary), while low-risk changes allow faster rollouts (e.g., blue-green).
-    \item \textbf{Monitoring Feedback}: Post-deployment metrics refine future risk assessments.
-\end{itemize}
-
-This creates a **closed-loop system** where deployment decisions adapt to real-time conditions, improving reliability and efficiency.
-
-
 \subsubsection{Cloud-Native Testing Platforms with High Concurrency Handling}
 
 Cloud-native platforms enable scalable, resilient testing environments by leveraging containerization and orchestration. Key components include:
@@ -786,6 +816,13 @@ Cloud-native platforms enable scalable, resilient testing environments by levera
     \item \textbf{Kubernetes}: Manages container scaling, load balancing, and failover.
     \item \textbf{Infrastructure-as-Code (IaC)}: Tools like Terraform automate resource provisioning and cost optimization.
 \end{itemize}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{Pre.-AI-SE-main/picture/components-of-kubernetes.pdf}
+  \caption{K8s}
+  \label{fig:adwin}
+\end{figure}
 
 The architecture for high-concurrency testing typically follows this pattern:
 \begin{itemize}
@@ -825,7 +862,6 @@ The testing pipeline should include:
 This ensures applications meet performance SLAs while maintaining stability during peak usage.
 
 \subsubsection{Challenges and Solutions}
-
 
 While AI-driven CI/CD integration offers significant benefits, it also presents several challenges that need to be addressed.
 
