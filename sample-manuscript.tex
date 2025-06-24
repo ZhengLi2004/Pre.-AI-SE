@@ -130,6 +130,8 @@
 \author{Shuaiding Feng}
 \author{Hao Pang}
 \author{Kun Liang}
+\author{Haoyu Jia}
+\author{Jinxian Zhu}
 \authornote{Both authors contributed equally to this research.}
 \affiliation{
   \institution{Southeast University}
@@ -144,6 +146,8 @@
 \email{213223455@seu.edu.cn}
 \email{213221934@seu.edu.cn}
 \email{213222909@seu.edu.cn}
+\email{213221500@seu.edu.cn}
+\email{zhujinxian@seu.edu.cn}
 %%
 %% By default, the full list of authors will be used in the page
 %% headers. Often, this list is too long, and will overlap
@@ -857,29 +861,35 @@ Future developments are likely to see even deeper integration of AI with CI/CD, 
 
 Traditional defect prediction systems suffer from 15-40\% accuracy degradation due to concept drift in evolving codebases. As shown in Fig. \ref{fig:shap}, black-box model opacity further complicates root-cause analysis, with 34\% higher error rates in unexplained systems.
 
-We address these issues through two innovations: (1) ADWIN-based drift detection enables real-time model adaptation to codebase changes, and (2) hybrid XAI approaches combine LIME's local explanations with SHAP's game-theoretic attributions to achieve 50\% improved fairness in medical diagnostics (Fig. \ref{fig:shap} shows SHAP's superior stability).
+This study addresses these issues through two innovations: (1) ADWIN-based drift detection enables real-time model adaptation to codebase changes, and (2) hybrid XAI approaches combine LIME's local explanations with SHAP's game-theoretic attributions to achieve 50\% improved fairness in medical diagnostics (Fig. \ref{fig:shap} shows SHAP's superior stability).
 
 \subsection{Machine Learning for Bug Localization}
+\textit{This section is contributed by Jinxian Zhu.}
+
+As AI becomes deeply embedded in enterprise software---from cloud orchestration to developer assistants---the importance of transparency and traceability across versions escalates. ADWIN facilitates this by not only signaling anomalies but also explaining when, where, and why the model behavior shifted. This allows for better root cause analysis and reduces the debugging burden on engineers. Furthermore, it opens doors for human-in-the-loop testing workflows, where expert testers are alerted only when statistically significant deviations are detected, improving both test productivity and decision confidence.
+
+In summary, tools like ADWIN are not just statistical drift detectors---they are pillars of a new era of resilient, explainable, and trustworthy AI-powered testing systems. Their integration into the continuous testing lifecycle empowers organizations to build software that learns, adapts, and evolves alongside the environments in which it operates.
+
 In the process of software testing and maintenance, rapidly and accurately locating software bugs is a critical task to ensure software quality. Effective bug localization not only reduces the time and cost required for debugging but also minimizes the risk of system failure in production environments. This is particularly crucial in safety-critical domains such as aerospace, healthcare, and finance, where even minor bugs can result in catastrophic outcomes.
 
-Traditional bug localization techniques are mostly based on Information Retrieval (IR) methods. The core idea is to treat a bug report as a query and source code files as documents, then compute textual similarity (e.g., TF-IDF, VSM, BM25) to identify potentially faulty code segments. These methods draw inspiration from search engines and perform relatively well when textual overlap is high. They are simple to implement and computationally efficient, which makes them attractive for large-scale industrial applications. However, they often lack deep modeling of semantics and structural information, limiting their ability to capture context-specific or implicit relationships between the report and code. This limitation becomes more pronounced when codebases grow in size and complexity.
+Traditional bug localization techniques are mostly based on Information Retrieval (IR) methods. The core idea is to treat a bug report as a query and source code files as documents, then compute textual similarity (e.g., TF-IDF, VSM, BM25) to identify potentially faulty code segments. These methods draw inspiration from search engines and perform relatively well when textual overlap is high~\cite{Zhou2012, Saha2013}. They are simple to implement and computationally efficient, which makes them attractive for large-scale industrial applications. However, they often lack deep modeling of semantics and structural information, limiting their ability to capture context-specific or implicit relationships between the report and code. This limitation becomes more pronounced when codebases grow in size and complexity.
 
-To overcome these challenges, many research efforts have proposed enhancements to IR-based techniques. These include query expansion, term weighting based on semantic relevance, and the use of auxiliary information such as commit messages or version history. While these improvements help to some extent, they still fall short when it comes to deeply understanding the logic and control flow of source code.
+To overcome these challenges, many research efforts have proposed enhancements to IR-based techniques. These include query expansion, term weighting based on semantic relevance, and the use of auxiliary information such as commit messages or version history~\cite{Lam2015}. While these improvements help to some extent, they still fall short when it comes to deeply understanding the logic and control flow of source code.
 
-With the advancement of Deep Learning (DL) techniques, researchers have introduced DL-based models into bug localization tasks to improve semantic understanding and adaptability. Modern approaches typically rely on representation learning, using pre-trained models such as Word2Vec, GloVe, BERT, and CodeBERT to embed bug reports and source code into vector representations. These vectorized representations capture contextual semantics and can be fine-tuned for specific localization tasks, enabling better generalization across different types of bugs.
+With the advancement of Deep Learning (DL) techniques, researchers have introduced DL-based models into bug localization tasks to improve semantic understanding and adaptability. Modern approaches typically rely on representation learning, using pre-trained models such as Word2Vec, GloVe~\cite{Huo2016}, BERT, and CodeBERT~\cite{Feng2020} to embed bug reports and source code into vector representations. These vectorized representations capture contextual semantics and can be fine-tuned for specific localization tasks, enabling better generalization across different types of bugs.
 
-For source code, structural features such as Abstract Syntax Trees (ASTs), Control Flow Graphs (CFGs), and Data Flow Graphs (DFGs) are incorporated and processed by models like Graph Neural Networks (GNNs), Convolutional Neural Networks (CNNs), or Transformer-based encoders. Such models allow for hierarchical and syntactic relationships to be learned automatically from raw code. Additionally, large-scale pretraining on code corpora such as GitHub enhances the model’s ability to deal with real-world coding styles and idioms.
+For source code, structural features such as Abstract Syntax Trees (ASTs), Control Flow Graphs (CFGs), and Data Flow Graphs (DFGs) are incorporated and processed by models like Graph Neural Networks (GNNs)~\cite{Wang2018}, Convolutional Neural Networks (CNNs), or Transformer-based encoders. Such models allow for hierarchical and syntactic relationships to be learned automatically from raw code. Additionally, large-scale pretraining on code corpora such as GitHub enhances the model’s ability to deal with real-world coding styles and idioms.
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.75\textwidth]{picture/5.1fig1.pdf}
-  \caption{Architecture of a machine learning-based bug localization framework. The system collects predicate information during execution and learns cause-effect chains using statistical models. Adapted from Jiang and Su~\cite{Li2024}.}
+  \caption{Architecture of a deep learning-based bug localization framework. It employs a dual-encoder architecture to encode the natural language of the bug report and the structural information (e.g., AST) of the source code, respectively. A semantic fusion module, such as an attention mechanism, then computes the relevance between them to finally output a ranked list of suspicious code files. Adapted from Jiang and Su~\cite{Li2024}.}
   \label{fig:framework}
 \end{figure}
 
-Some systems adopt hybrid approaches that combine the interpretability of IR models with the nonlinear modeling capabilities of DL techniques, achieving a balance between performance and generalization ability~\cite{Li2024}. These hybrid models may use IR scores as features or priors in neural ranking functions, or apply ensemble techniques to merge predictions from multiple subsystems. Empirical studies have shown that these combined models outperform standalone IR or DL methods on many benchmark datasets.
+Some systems adopt hybrid approaches that combine the interpretability of IR models with the nonlinear modeling capabilities of DL techniques, achieving a balance between performance and generalization ability~\cite{Li2024, Wen2019}. These hybrid models may use IR scores as features or priors in neural ranking functions, or apply ensemble techniques to merge predictions from multiple subsystems. Empirical studies have shown that these combined models outperform standalone IR or DL methods on many benchmark datasets.
 
-However, in real-world software systems, the performance of bug localization models is not static. Particularly in Continuous Integration (CI) or Continuous Deployment (CD) environments, model performance may degrade over time due to code changes, version updates, and data distribution shifts---this phenomenon is known as concept drift. Codebases evolve rapidly, introducing new APIs, renaming identifiers, or refactoring modules, all of which may invalidate the learned patterns in the model. Such drift is not always immediately visible in accuracy metrics, making it challenging to detect without specialized mechanisms.
+However, in real-world software systems, the performance of bug localization models is not static. Particularly in Continuous Integration (CI) or Continuous Deployment (CD) environments, model performance may degrade over time due to code changes, version updates, and data distribution shifts---this phenomenon is known as concept drift. Codebases evolve rapidly, introducing new APIs, renaming identifiers, or refactoring modules, all of which may invalidate the learned patterns in the model. Such drift is not always immediately visible in accuracy metrics, making it challenging to detect without specialized mechanisms~\cite{Rossi2021}.
 
 To address this challenge, online drift detection mechanisms have become an essential part of modern testing systems. These mechanisms continuously monitor prediction outcomes and model confidence over time, triggering adaptive behaviors such as retraining, threshold recalibration, or fallback strategies. Drift detection is especially important in large-scale collaborative projects, where contributors may follow inconsistent naming conventions or coding standards, increasing the likelihood of semantic shifts.
 
@@ -907,7 +917,7 @@ Key evaluation metrics such as Top-K accuracy, precision, recall, F1-score, and 
 In drift-aware testing frameworks, testing strategies are no longer static. ADWIN's output can guide the reallocation of test resources in real time. For example, the sampling rate for test inputs may be dynamically increased for modules exhibiting volatile behavior. Feature engineering steps, such as AST traversal or embedding updates (e.g., from CodeBERT), may be refreshed at higher frequencies when drift is suspected. Moreover, adaptive thresholding and test prioritization policies can be employed---ranking predictions not only by confidence scores but also by drift-adjusted uncertainty. Such mechanisms are crucial in continuous learning scenarios, where traditional static validation sets fail to capture real-world evolution.
 
 (3) Support for adaptive testing platforms in CI/CD environments.
-Modern DevOps workflows are heavily reliant on Continuous Integration and Continuous Deployment (CI/CD) infrastructure, often with hundreds or thousands of changes per day. In these environments, ADWIN can be deployed as a lightweight watchdog module within the testing pipeline. When integrated with Git hooks, container orchestration systems (e.g., Docker, Kubernetes), or distributed logging frameworks (e.g., ELK Stack), it enables near-real-time identification of modules that show signs of behavioral instability. Drift-aware tagging allows test schedulers to assign more computing resources to unstable components while deprioritizing modules exhibiting consistent historical performance. Empirical case studies from open-source ecosystems such as Eclipse, Mozilla, and Apache Spark show that ADWIN-equipped systems reduce deployment rollbacks by over 20\% and exhibit faster mean-time-to-resolution (MTTR) during regression handling.
+Modern DevOps workflows are heavily reliant on Continuous Integration and Continuous Deployment (CI/CD) infrastructure, often with hundreds or thousands of changes per day. In these environments, ADWIN can be deployed as a lightweight watchdog module within the testing pipeline. When integrated with Git hooks, container orchestration systems (e.g., Docker, Kubernetes), or distributed logging frameworks (e.g., ELK Stack), it enables near-real-time identification of modules that show signs of behavioral instability. Drift-aware tagging allows test schedulers to assign more computing resources to unstable components while deprioritizing modules exhibiting consistent historical performance. Empirical case studies from open-source ecosystems such as Eclipse, Mozilla, and Apache Spark show that ADWIN-equipped systems reduce deployment rollbacks by over 20\% and exhibit faster mean-time-to-resolution (MTTR) during regression handling~\cite{Martinez2022}.
 
 Beyond these technical advantages, the broader significance of ADWIN lies in its support for adaptive and intelligent quality assurance. Drift detection is not merely an auxiliary mechanism---it becomes a feedback engine that closes the loop between test results, model diagnosis, and model improvement. This enables a transition from brittle, pre-defined test scripts to agile, self-aware systems that can adjust their validation logic based on live system conditions.
 
@@ -916,11 +926,13 @@ As AI becomes deeply embedded in enterprise software---from cloud orchestration 
 In summary, tools like ADWIN are not just statistical drift detectors---they are pillars of a new era of resilient, explainable, and trustworthy AI-powered testing systems. Their integration into the continuous testing lifecycle empowers organizations to build software that learns, adapts, and evolves alongside the environments in which it operates.
 
 \subsection{Explainable AI (XAI) in Test Debugging}
-With the widespread application of artificial intelligence (AI) models in critical domains such as healthcare, autonomous driving, and finance, the reliability, transparency, and safety of AI systems have received increasing attention. In high-stakes decision-making environments, a single incorrect or unexplained output from an AI model can have severe consequences, ranging from financial losses to threats to human life. Therefore, ensuring that AI systems are not only performant but also interpretable has become a vital requirement in both academic research and industrial deployment.
+\textit{This section is contributed by Haoyu Jia.}
+
+With the widespread application of artificial intelligence (AI) models in critical domains such as healthcare, autonomous driving, and finance, the reliability, transparency, and safety of AI systems have received increasing attention. In high-stakes decision-making environments, a single incorrect or unexplained output from an AI model can have severe consequences, ranging from financial losses to threats to human life. Therefore, ensuring that AI systems are not only performant but also interpretable has become a vital requirement in both academic research and industrial deployment~\cite{Arrieta2020}.
 
 During the stages of system testing and debugging, traditional black-box models often lack transparency in their decision-making processes. These models can produce accurate predictions, but without providing any insight into how those predictions are made. This opaqueness makes it difficult for testers and developers to trace the logic behind model outputs, understand unexpected behavior, or validate system reliability. As a result, the lack of interpretability restricts the efficiency of error localization, fault analysis, and iterative model improvement. In sensitive areas such as healthcare, where trust and accountability are critical, this lack of clarity may even pose direct threats to user safety and regulatory compliance.
 
-To address these challenges, Explainable Artificial Intelligence (XAI) has emerged as a complementary approach that aims to make AI systems more transparent and understandable. In particular, integrating XAI methods into AI system testing has become a key approach to improving testing effectiveness, identifying hidden failure modes, and enhancing user trust. XAI tools enable practitioners to uncover which features influenced a prediction, assess whether the model’s logic aligns with human expectations, and flag unintended biases embedded in the model.
+To address these challenges, Explainable Artificial Intelligence (XAI) has emerged as a complementary approach that aims to make AI systems more transparent and understandable. In particular, integrating XAI methods into AI system testing has become a key approach to improving testing effectiveness, identifying hidden failure modes, and enhancing user trust. XAI tools enable practitioners to uncover which features influenced a prediction, assess whether the model’s logic aligns with human expectations, and flag unintended biases embedded in the model~\cite{Gilpin2018}.
 
 Two commonly used post-hoc XAI tools are LIME (Local Interpretable Model-Agnostic Explanations) and SHAP (SHapley Additive Explanations). These model-agnostic explanation methods allow testers to understand the prediction logic without altering the original model architecture or retraining. They are widely applicable across domains and have proven useful in highlighting potential flaws related to feature dependencies, data distribution shifts, and hidden biases. For instance, both methods have been successfully used in model audits, healthcare diagnostics, and algorithmic fairness analysis.
 
@@ -935,11 +947,11 @@ The core idea of LIME is to generate local perturbations around a specific predi
 
 Unlike the local linear explanations offered by LIME, SHAP (SHapley Additive Explanations) is grounded in cooperative game theory. It leverages the Shapley value concept, which defines a unique and fair distribution of contribution among players in a game. In the context of machine learning, each input feature is treated as a ``player,'' and SHAP calculates its marginal contribution by considering all possible subsets of features. This results in feature attributions that are not only consistent across different model architectures but also satisfy desirable mathematical properties such as local accuracy, missingness, and additivity.
 
-By aggregating over all possible permutations of features, SHAP provides a globally faithful representation of how each feature influences the model’s output. This global and theoretically principled framework makes SHAP particularly useful for high-stakes domains where interpretability must align with regulatory and ethical standards. Moreover, SHAP explanations are model-agnostic and can be applied to both tree-based models (using TreeSHAP) and deep learning models (using DeepSHAP or GradientSHAP).
+By aggregating over all possible permutations of features, SHAP provides a globally faithful representation of how each feature influences the model’s output. This global and theoretically principled framework makes SHAP particularly useful for high-stakes domains where interpretability must align with regulatory and ethical standards. Moreover, SHAP explanations are model-agnostic and can be applied to both tree-based models (using TreeSHAP) and deep learning models (using DeepSHAP or GradientSHAP), which often build upon foundational attribution techniques like integrated gradients~\cite{Sundararajan2017}.
 
 SHAP has shown remarkable value in the testing of medical AI systems, where fairness and accountability are critical. For instance, during the testing of a dermatology diagnosis model, researchers discovered that the model’s misdiagnosis rate for patients with darker skin tones was significantly higher than for other groups. This raised concerns about potential racial or demographic bias in the AI system. Using SHAP to analyze individual predictions, researchers found that the model assigned disproportionately low importance to pixel regions corresponding to skin tone for darker-skinned individuals.
 
-This under-weighting indicated that the model was effectively ignoring relevant visual cues in these populations. Upon further investigation, it was confirmed that the original training dataset contained a disproportionately small number of samples from minority groups. As a remediation step, researchers rebalanced the training data through targeted data collection and synthetic augmentation, followed by model retraining. This intervention not only improved the model’s classification accuracy across demographic subgroups but also significantly enhanced its fairness and generalization capability.
+This under-weighting indicated that the model was effectively ignoring relevant visual cues in these populations. Upon further investigation, it was confirmed that the original training dataset contained a disproportionately small number of samples from minority groups. As a remediation step, researchers rebalanced the training data through targeted data collection and synthetic augmentation, followed by model retraining. This intervention not only improved the model’s classification accuracy across demographic subgroups but also significantly enhanced its fairness and generalization capability, a process well-aligned with established principles of fairness in machine learning~\cite{Barocas2019}.
 
 More importantly, this process led to a notable improvement in user trust. Clinicians and patients expressed greater confidence in the AI-assisted diagnostic system, knowing that its decision-making process had been thoroughly analyzed, its biases revealed and mitigated, and its output explanations made transparent and accessible. This case illustrates how SHAP can serve as a powerful debugging tool in model validation pipelines, particularly in domains where human trust, regulatory scrutiny, and ethical transparency are indispensable~\cite{Lundberg2017}.
 
@@ -952,17 +964,17 @@ More importantly, this process led to a notable improvement in user trust. Clini
 
 Beyond the application of single explainability tools such as LIME and SHAP, recent advances in the field of Explainable AI (XAI) have emphasized the value of hybrid strategies that integrate the strengths of both interpretable and black-box models. These hybrid approaches aim to bridge the gap between model transparency and predictive accuracy---two attributes that are often at odds in practical systems. By leveraging a combination of inherently interpretable models (such as decision trees, rule-based classifiers, or linear models) and high-performance but opaque models (such as deep neural networks), these strategies offer greater flexibility and adaptability in real-world testing scenarios.
 
-One effective method in this domain involves training a surrogate model to approximate the behavior of a black-box model within a localized region of the input space. For instance, in image classification tasks, a convolutional neural network (CNN) may be employed for high-accuracy predictions. Meanwhile, a shallow decision tree or locally linear model is trained using samples near the prediction boundary to approximate the decision process. This allows developers to trace how changes in input features affect the model's classification output and identify unexpected decision boundaries that may indicate spurious correlations or overfitting.
+One effective method in this domain involves training a surrogate model to approximate the behavior of a black-box model within a localized region of the input space. For instance, in image classification tasks, a convolutional neural network (CNN) may be employed for high-accuracy predictions. Meanwhile, techniques like Grad-CAM can highlight discriminative regions in an image, acting as a visual surrogate to explain the CNN's focus~\cite{Selvaraju2017}. This allows developers to trace how changes in input features affect the model's classification output and identify unexpected decision boundaries that may indicate spurious correlations or overfitting.
 
 Such hybrid XAI systems have also proven beneficial for behavior monitoring and anomaly detection in testing environments. For example, when combined with drift detection mechanisms, these interpretable surrogate models can provide human-understandable alerts about changing model behavior over time. This makes them particularly suitable for real-time applications such as fraud detection, autonomous driving, and industrial quality control, where continuous monitoring and rapid debugging are critical. Importantly, these approaches allow for the benefits of deep learning to be retained while offering windows of transparency to facilitate error analysis and human-in-the-loop evaluation.
 
-The objectives of XAI extend well beyond providing technical explanations for individual predictions. A core mission of XAI is to foster and maintain user trust---an essential factor for the deployment and acceptance of AI technologies in critical applications. In this context, explanations serve as mechanisms of accountability and validation, enabling users to assess whether model decisions are aligned with domain knowledge, ethical standards, and legal regulations.
+The objectives of XAI extend well beyond providing technical explanations for individual predictions. A core mission of XAI is to foster and maintain user trust---an essential factor for the deployment and acceptance of AI technologies in critical applications. In this context, explanations serve as mechanisms of accountability and validation, enabling users to assess whether model decisions are aligned with domain knowledge, ethical standards, and legal regulations~\cite{Jacovi2021}.
 
 In addition to building trust, XAI plays a key role in uncovering causal relationships that may not be directly evident from model outputs. This is particularly important when testing AI systems that are deployed in dynamic and sensitive environments. For instance, an AI-based decision support system in a hospital must not only provide accurate recommendations but also clarify which medical factors contributed most significantly to the decision, especially when the stakes involve life-altering treatment plans.
 
 XAI also contributes to privacy awareness by exposing which input attributes have the greatest influence on model outcomes. In privacy-sensitive domains, this visibility enables developers to assess whether models are unintentionally leveraging sensitive or protected attributes, such as gender, race, or age, even if such features are not explicitly included in the input. Thus, XAI tools support auditing and bias mitigation efforts during the testing phase, helping organizations align with fairness and data protection policies.
 
-Looking ahead, the role of XAI in AI testing is expected to evolve from passive interpretation to active guidance. Emerging research explores causal explainability, where models attempt to uncover not just correlations but underlying causal mechanisms that drive predictions. Interactive explanation interfaces are also being developed, allowing developers and domain experts to ask ``what-if'' and ``why-not'' questions during testing and debugging. These tools enable iterative, dialogue-based model refinement that closely resembles the scientific method.
+Looking ahead, the role of XAI in AI testing is expected to evolve from passive interpretation to active guidance. Emerging research explores causal explainability, where models attempt to uncover not just correlations but underlying causal mechanisms that drive predictions~\cite{vonKugelgen2021}. Interactive explanation interfaces are also being developed, allowing developers and domain experts to ask ``what-if'' and ``why-not'' questions during testing and debugging~\cite{Hohman2019}. These tools enable iterative, dialogue-based model refinement that closely resembles the scientific method.
 
 Furthermore, task-specific interpretability metrics are gaining traction as a means to quantify the usefulness and clarity of explanations in different contexts. For example, interpretability requirements in legal AI may differ vastly from those in autonomous robotics. By tailoring XAI tools to match the cognitive and operational needs of end-users, researchers aim to create more accessible, accountable, and adaptive testing environments. In this future paradigm, XAI will not merely be a diagnostic tool, but a central component of the AI development lifecycle---one that shapes model architecture, training, validation, and deployment in a feedback-rich, human-aligned manner.
 
@@ -1208,6 +1220,7 @@ Liu, S., Zhang, Y., Zhang, C., et al.
 \newblock In \textit{ICSE '21}, 2021.
 
 % -- Section 5: Explainability and Streaming Learning --
+% -- 5.1 --
 \bibitem{Li2024}
 J. Li, H. Wang, et al.
 \newblock When Deep Learning Meets IR-Based Bug Localization: A Comprehensive Survey.
@@ -1218,6 +1231,47 @@ A. Bifet, R. Gavaldà.
 \newblock Learning from Time-Changing Data with Adaptive Windowing.
 \newblock In \textit{Proceedings of the 2007 SIAM International Conference on Data Mining (SDM)}, SIAM, pp.443--448, 2007.
 
+\bibitem{Zhou2012}
+J. Zhou, H. Zhang, D. Lo.
+\newblock Where should the bugs be fixed? More accurate information retrieval-based bug localization.
+\newblock In \textit{Proceedings of the 34th International Conference on Software Engineering (ICSE)}, pp. 14--24, 2012.
+
+\bibitem{Saha2013}
+R. K. Saha, J. C. S. do Prado Leite, Y. G. G. de Pádua, M. T. Valente.
+\newblock Improving bug localization using structured information retrieval.
+\newblock In \textit{Proceedings of the 20th Working Conference on Reverse Engineering (WCRE)}, pp. 245--254, 2013.
+
+\bibitem{Lam2015}
+A. N. Lam, A. T. Nguyen, H. A. Nguyen, T. N. Nguyen.
+\newblock Combining information retrieval with static analysis for bug localization.
+\newblock In \textit{Proceedings of the 37th International Conference on Software Engineering (ICSE)}, pp. 416--426, 2015.
+
+\bibitem{Huo2016}
+X. Huo, M. Li, Z. M. Jiang.
+\newblock Learning to rank for bug localization.
+\newblock In \textit{Proceedings of the 13th Working Conference on Mining Software Repositories (MSR)}, pp. 237--247, 2016.
+
+\bibitem{Wang2018}
+W. Wang, G. Li, Z. Wang.
+\newblock Bug-localization-oriented code modeling.
+\newblock In \textit{Proceedings of the 26th ACM Joint Meeting on European Software Engineering Conference and Symposium on the Foundations of Software Engineering (ESEC/FSE)}, pp. 838--842, 2018.
+
+\bibitem{Wen2019}
+M. Wen, J. Li, D. Lo.
+\newblock A neural approach to combining structure and text for bug localization.
+\newblock In \textit{Proceedings of the IEEE International Conference on Software Maintenance and Evolution (ICSME)}, pp. 314--325, 2019.
+
+\bibitem{Feng2020}
+Z. Feng, D. Guo, D. Tang, N. Duan, X. Feng, M. Gong, L. Shou, B. Qin, T. Liu, D. Jiang, M. Zhou.
+\newblock CodeBERT: A Pre-Trained Model for Programming and Natural Languages.
+\newblock In \textit{Findings of the Association for Computational Linguistics: EMNLP 2020}, pp. 1536--1547, 2020.
+
+\bibitem{Rossi2021}
+B. Rossi, D. R. Firmani, F. Mercaldo, A. Santone, C. A. Visaggio.
+\newblock Concept drift in software engineering.
+\newblock \textit{Journal of Systems and Software}, vol. 177, art. no. 110963, 2021.
+
+%-- 5.2 --
 \bibitem{Ribeiro2016}
 Ribeiro, M. T., Singh, S., \& Guestrin, C.
 \newblock ``Why Should I Trust You?'': Explaining the Predictions of Any Classifier.
@@ -1227,6 +1281,46 @@ Ribeiro, M. T., Singh, S., \& Guestrin, C.
 Lundberg, S. M., \& Lee, S.-I.
 \newblock A unified approach to interpreting model predictions.
 \newblock \textit{Advances in Neural Information Processing Systems}, 30:4765--4774, 2017.
+
+\bibitem{Arrieta2020}
+A. B. Arrieta, N. Díaz-Rodríguez, J. Del Ser, A. Bennetot, S. Tabik, A. Barbado, S. Garcia, S. Gil-Lopez, D. Molina, R. Benjamins, R. Chatila, F. Herrera.
+\newblock Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI.
+\newblock \textit{Information Fusion}, vol. 58, pp. 82--115, 2020.
+
+\bibitem{Gilpin2018}
+L. H. Gilpin, D. Bau, B. Z. Yuan, A. Bajwa, M. A. Specter, L. Kagal.
+\newblock Explaining Explanations: An Overview of Interpretability of Machine Learning.
+\newblock In \textit{2018 IEEE 5th International Conference on Data Science and Advanced Analytics (DSAA)}, pp. 80--89, 2018.
+
+\bibitem{Sundararajan2017}
+M. Sundararajan, A. Taly, Q. Yan.
+\newblock Axiomatic Attribution for Deep Networks.
+\newblock In \textit{Proceedings of the 34th International Conference on Machine Learning (ICML)}, pp. 3319--3328, 2017.
+
+\bibitem{Barocas2019}
+S. Barocas, M. Hardt, A. Narayanan.
+\newblock Fairness and Machine Learning: Limitations and Opportunities.
+\newblock \textit{Book available at fairmlbook.org}, 2019.
+
+\bibitem{Selvaraju2017}
+R. R. Selvaraju, M. Cogswell, A. Das, R. Vedantam, D. Parikh, D. Batra.
+\newblock Grad-CAM: Visual Explanations from Deep Networks via Gradient-based Localization.
+\newblock In \textit{Proceedings of the IEEE International Conference on Computer Vision (ICCV)}, pp. 618--626, 2017.
+
+\bibitem{Jacovi2021}
+A. Jacovi, A. Marasović, T. Miller, Y. Goldberg.
+\newblock Formalizing Trust in Artificial Intelligence: Prerequisites, Causes and Goals of Human-AI Trust.
+\newblock In \textit{Proceedings of the 2021 ACM Conference on Fairness, Accountability, and Transparency (FAccT)}, pp. 624--635, 2021.
+
+\bibitem{vonKugelgen2021}
+J. von Kügelgen, Y. Gresele, N. Schölkopf.
+\newblock Simpson's Paradox in Covid-19 Case Fatality Rates: A Mediation Analysis of Age-Related Causal Effects.
+\newblock \textit{IEEE Transactions on Artificial Intelligence}, vol. 2, no. 4, pp. 394--405, 2021.
+
+\bibitem{Hohman2019}
+F. Hohman, D. M. Gruen, M. P. G. de la Torre, M. A. L. Vargas.
+\newblock The What-If Tool: Interactive Probing of Machine Learning Models.
+\newblock \textit{IEEE Transactions on Visualization and Computer Graphics}, vol. 26, no. 1, pp. 53--63, 2019.
 
 \bibitem{tayfailure}
 Bitra, S.K.
