@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.6.2)  20 JUN 2025 23:27
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.6.2)  25 JUN 2025 10:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1306,8 +1306,17 @@ Package: indentfirst 2023/07/02 v1.03 Indent first paragraph (DPC)
 Package hyperref Info: Option `colorlinks' set `true' on input line 112.
 Package hyperref Info: Option `pdfdisplaydoctitle' set `true' on input line 112.
 \c@theorem=\count333
- Include comment 'screenonly' Excluding comment 'printonly' Include comment 'anonsuppress'
-No file sample-manuscript.aux.
+ Include comment 'screenonly' Excluding comment 'printonly' Include comment 'anonsuppress' (./sample-manuscript.aux
+
+LaTeX Warning: Label `fig:adwin' multiply defined.
+
+
+Package natbib Warning: Citation `Kenfack2021' multiply defined.
+
+
+Package natbib Warning: Citation `Zhou2024' multiply defined.
+
+)
 \openout1 = `sample-manuscript.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 112.
@@ -1345,7 +1354,7 @@ LaTeX Font Info:    Font shape `TU/libertinusmath-regular.otf(3)/m/n' will be
 LaTeX Font Info:    Font shape `TU/libertinusmath-regular.otf(3)/m/n' will be
 (Font)              scaled to size 5.18944pt on input line 112.
 LaTeX Font Info:    Trying to load font information for U+msa on input line 112.
-(d:/download/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
+ (d:/download/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 112.
@@ -1369,12 +1378,10 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 Package hyperref Info: Link coloring ON on input line 112.
+ (./sample-manuscript.out) (./sample-manuscript.out)
 \@outlinefile=\write4
 \openout4 = `sample-manuscript.out'.
 
-
-
-Package hyperref Warning: Rerun to get /PageLabels entry.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
@@ -1414,108 +1421,78 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/n' will be
-(Font)              scaled to size 12.0pt on input line 208.
+(Font)              scaled to size 12.0pt on input line 219.
 LaTeX Font Info:    Font shape `TU/LinBiolinum(0)/m/n' will be
-(Font)              scaled to size 12.0pt on input line 208.
+(Font)              scaled to size 12.0pt on input line 219.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `LinBiolinum' (encoding: TU).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `TU/LinBiolinum(0)/b/n' will be
-(Font)              scaled to size 12.0pt on input line 208.
+(Font)              scaled to size 12.0pt on input line 219.
 LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/n' will be
-(Font)              scaled to size 10.95pt on input line 208.
+(Font)              scaled to size 10.95pt on input line 219.
 LaTeX Font Info:    Font shape `TU/LinBiolinum(0)/m/n' will be
-(Font)              scaled to size 10.95pt on input line 208.
+(Font)              scaled to size 10.95pt on input line 219.
 LaTeX Font Info:    Font shape `TU/libertinusmath-regular.otf(1)/m/n' will be
-(Font)              scaled to size 11.36603pt on input line 208.
+(Font)              scaled to size 11.36603pt on input line 219.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `libertinusmath-regular.otf' (encoding: TU).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `TU/libertinusmath-regular.otf(1)/m/n' will be
-(Font)              scaled to size 8.30396pt on input line 208.
+(Font)              scaled to size 8.30396pt on input line 219.
 LaTeX Font Info:    Font shape `TU/libertinusmath-regular.otf(1)/m/n' will be
-(Font)              scaled to size 6.22797pt on input line 208.
+(Font)              scaled to size 6.22797pt on input line 219.
 LaTeX Font Info:    Font shape `TU/libertinusmath-regular.otf(2)/m/n' will be
-(Font)              scaled to size 11.36703pt on input line 208.
+(Font)              scaled to size 11.36703pt on input line 219.
 LaTeX Font Info:    Font shape `TU/libertinusmath-regular.otf(2)/m/n' will be
-(Font)              scaled to size 8.30469pt on input line 208.
+(Font)              scaled to size 8.30469pt on input line 219.
 LaTeX Font Info:    Font shape `TU/libertinusmath-regular.otf(2)/m/n' will be
-(Font)              scaled to size 6.22852pt on input line 208.
+(Font)              scaled to size 6.22852pt on input line 219.
 LaTeX Font Info:    Font shape `TU/libertinusmath-regular.otf(3)/m/n' will be
-(Font)              scaled to size 11.36485pt on input line 208.
+(Font)              scaled to size 11.36485pt on input line 219.
 LaTeX Font Info:    Font shape `TU/libertinusmath-regular.otf(3)/m/n' will be
-(Font)              scaled to size 8.3031pt on input line 208.
+(Font)              scaled to size 8.3031pt on input line 219.
 LaTeX Font Info:    Font shape `TU/libertinusmath-regular.otf(3)/m/n' will be
-(Font)              scaled to size 6.22733pt on input line 208.
+(Font)              scaled to size 6.22733pt on input line 219.
 (d:/download/texlive/2025/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 ) (d:/download/texlive/2025/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Font shape `TU/LinBiolinum(0)/m/n' will be
-(Font)              scaled to size 9.0pt on input line 208.
+(Font)              scaled to size 9.0pt on input line 219.
+
+Overfull \hbox (1.37987pt too wide) in paragraph at lines 219--219
+\TU/LinBiolinum(0)/m/n/10.95 ZHENG LI, MENGXUAN LIU, SHUOYANG XU, PENGYU XIE, ZHENYU YAN, SHUAIDING FENG,
+ []
+
 LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 208.
+(Font)              scaled to size 5.0pt on input line 219.
 LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 208.
+(Font)              scaled to size 8.0pt on input line 219.
 LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/it' will be
-(Font)              scaled to size 8.0pt on input line 208.
+(Font)              scaled to size 8.0pt on input line 219.
 LaTeX Font Info:    Font shape `TU/LinLibertine(0)/b/n' will be
-(Font)              scaled to size 8.0pt on input line 208.
-
-
-LaTeX Warning: Reference `TotPages' on page 1 undefined on input line 208.
-
+(Font)              scaled to size 8.0pt on input line 219.
 LaTeX Font Info:    Font shape `TU/LinBiolinum(0)/b/n' will be
-(Font)              scaled to size 9.0pt on input line 210.
+(Font)              scaled to size 9.0pt on input line 221.
 LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/it' will be
-(Font)              scaled to size 9.0pt on input line 211.
-LaTeX Font Info:    Font shape `TU/LinLibertine(0)/b/n' will be
-(Font)              scaled to size 9.0pt on input line 215.
-
-Package natbib Warning: Citation `Zhou2024' on page 1 undefined on input line 215.
-
-
-Package natbib Warning: Citation `Kenfack2021' on page 1 undefined on input line 215.
-
+(Font)              scaled to size 9.0pt on input line 222.
 
 
 LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 216.
+(Font)              scaled to size 6.0pt on input line 227.
 [1.1]
-
-Package natbib Warning: Citation `Li2024' on page 2 undefined on input line 217.
-
-
-Package natbib Warning: Citation `Zhou2024' on page 2 undefined on input line 221.
-
-
-Package natbib Warning: Citation `Chen2004' on page 2 undefined on input line 223.
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
 [2.2]
-
-Package natbib Warning: Citation `Guo2024' on page 3 undefined on input line 229.
-
-
-Package natbib Warning: Citation `Kenfack2021' on page 3 undefined on input line 231.
-
-
-Overfull \hbox (1.59515pt too wide) in paragraph at lines 231--232
+Overfull \hbox (1.59515pt too wide) in paragraph at lines 242--243
 []\TU/LinLibertine(0)/m/n/9 The application of generative artificial intelligence techniques, particularly Generative Adversarial Networks (GANs),
  []
-
-
-Package natbib Warning: Citation `Li2018' on page 3 undefined on input line 233.
-
-
-Package natbib Warning: Citation `Chib1995' on page 3 undefined on input line 235.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1523,175 +1500,113 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 [3.3]
-
-Package natbib Warning: Citation `Ribeiro2016' on page 4 undefined on input line 239.
-
-
-Package natbib Warning: Citation `Lundberg2017' on page 4 undefined on input line 239.
-
-
-LaTeX Warning: Reference `tab:aug_performance' on page 4 undefined on input line 247.
-
-
-LaTeX Warning: Reference `tab:tay-case' on page 4 undefined on input line 249.
-
-LaTeX Font Info:    Font shape `TU/LinBiolinum(0)/m/it' will be
-(Font)              scaled to size 9.0pt on input line 253.
-
-Package natbib Warning: Citation `Chen2004' on page 4 undefined on input line 253.
-
-LaTeX Font Info:    Font shape `TU/libertinusmath-regular.otf(1)/m/n' will be
-(Font)              scaled to size 7.47354pt on input line 253.
-LaTeX Font Info:    Font shape `TU/libertinusmath-regular.otf(1)/m/n' will be
-(Font)              scaled to size 5.60515pt on input line 253.
-LaTeX Font Info:    Font shape `TU/libertinusmath-regular.otf(2)/m/n' will be
-(Font)              scaled to size 9.34277pt on input line 253.
-LaTeX Font Info:    Font shape `TU/libertinusmath-regular.otf(2)/m/n' will be
-(Font)              scaled to size 7.47421pt on input line 253.
-LaTeX Font Info:    Font shape `TU/libertinusmath-regular.otf(2)/m/n' will be
-(Font)              scaled to size 5.60565pt on input line 253.
-LaTeX Font Info:    Font shape `TU/libertinusmath-regular.otf(3)/m/n' will be
-(Font)              scaled to size 9.34099pt on input line 253.
-LaTeX Font Info:    Font shape `TU/libertinusmath-regular.otf(3)/m/n' will be
-(Font)              scaled to size 7.47278pt on input line 253.
-LaTeX Font Info:    Font shape `TU/libertinusmath-regular.otf(3)/m/n' will be
-(Font)              scaled to size 5.60458pt on input line 253.
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
 [4.4]
-
-LaTeX Warning: Reference `fig:augmentation_framework' on page 5 undefined on input line 256.
-
-
-Package natbib Warning: Citation `Li2024' on page 5 undefined on input line 258.
-
+LaTeX Font Info:    Font shape `TU/LinBiolinum(0)/m/it' will be
+(Font)              scaled to size 9.0pt on input line 268.
+LaTeX Font Info:    Font shape `TU/libertinusmath-regular.otf(1)/m/n' will be
+(Font)              scaled to size 7.47354pt on input line 270.
+LaTeX Font Info:    Font shape `TU/libertinusmath-regular.otf(1)/m/n' will be
+(Font)              scaled to size 5.60515pt on input line 270.
+LaTeX Font Info:    Font shape `TU/libertinusmath-regular.otf(2)/m/n' will be
+(Font)              scaled to size 9.34277pt on input line 270.
+LaTeX Font Info:    Font shape `TU/libertinusmath-regular.otf(2)/m/n' will be
+(Font)              scaled to size 7.47421pt on input line 270.
+LaTeX Font Info:    Font shape `TU/libertinusmath-regular.otf(2)/m/n' will be
+(Font)              scaled to size 5.60565pt on input line 270.
+LaTeX Font Info:    Font shape `TU/libertinusmath-regular.otf(3)/m/n' will be
+(Font)              scaled to size 9.34099pt on input line 270.
+LaTeX Font Info:    Font shape `TU/libertinusmath-regular.otf(3)/m/n' will be
+(Font)              scaled to size 7.47278pt on input line 270.
+LaTeX Font Info:    Font shape `TU/libertinusmath-regular.otf(3)/m/n' will be
+(Font)              scaled to size 5.60458pt on input line 270.
 File: picture/2.1.pdf Graphic file (type pdf)
 <use picture/2.1.pdf>
 LaTeX Font Info:    Font shape `TU/LinBiolinum(0)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 267.
-
-Class acmart Warning: A possible image without description on input line 269.
+(Font)              scaled to size 8.0pt on input line 287.
 
 
-LaTeX Warning: Reference `tab:aug_performance' on page 5 undefined on input line 272.
+Class acmart Warning: A possible image without description on input line 289.
 
 
 
 [5.5]
-
-Package natbib Warning: Citation `Lundberg2017' on page 6 undefined on input line 291.
-
+LaTeX Font Info:    Font shape `TU/LinLibertine(0)/b/n' will be
+(Font)              scaled to size 9.0pt on input line 307.
 
 
 [6.6]
 
-Package natbib Warning: Citation `Kenfack2021' on page 7 undefined on input line 302.
-
-
-LaTeX Warning: Reference `tab:gan-advantages' on page 7 undefined on input line 306.
-
-
-Package natbib Warning: Citation `Zhou2024' on page 7 undefined on input line 331.
-
-
-
 [7.7]
-
-LaTeX Warning: Reference `tab:bias-impact' on page 8 undefined on input line 358.
-
-
-Underfull \hbox (badness 3260) in paragraph at lines 368--368
+Underfull \hbox (badness 3260) in paragraph at lines 393--393
 []\TU/LinLibertine(0)/m/n/9 Racial imbalance in training
  []
 
 
-Underfull \hbox (badness 1014) in paragraph at lines 370--370
+Underfull \hbox (badness 1014) in paragraph at lines 395--395
 []\TU/LinLibertine(0)/m/n/9 Underrepresentation of night-
  []
 
 
 
 [8.8]
-Overfull \hbox (8.77115pt too wide) in paragraph at lines 390--391
+Overfull \hbox (8.77115pt too wide) in paragraph at lines 415--416
 []\TU/LinLibertine(0)/m/n/9 In sum, while generative AI opens new frontiers for software testing, its misuse—especially when bias goes unchecked—
  []
 
 
-Underfull \vbox (badness 2261) has occurred while \output is active []
-
-
 
 [9.9]
+LaTeX Font Info:    Font shape `TU/LinLibertine(1)/m/n' will be
+(Font)              scaled to size 9.0pt on input line 454.
+LaTeX Font Info:    Font shape `TU/LinLibertine(1)/m/n' will be
+(Font)              scaled to size 7.2pt on input line 454.
+LaTeX Font Info:    Font shape `TU/LinLibertine(1)/m/n' will be
+(Font)              scaled to size 5.4pt on input line 454.
 
-Package natbib Warning: Citation `Guo2024' on page 10 undefined on input line 409.
-
-
-Underfull \vbox (badness 6944) has occurred while \output is active []
+Underfull \vbox (badness 3735) has occurred while \output is active []
 
 
 
 [10.10]
-LaTeX Font Info:    Font shape `TU/LinLibertine(1)/m/n' will be
-(Font)              scaled to size 9.0pt on input line 428.
-LaTeX Font Info:    Font shape `TU/LinLibertine(1)/m/n' will be
-(Font)              scaled to size 7.2pt on input line 428.
-LaTeX Font Info:    Font shape `TU/LinLibertine(1)/m/n' will be
-(Font)              scaled to size 5.4pt on input line 428.
 LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/n' will be
-(Font)              scaled to size 7.2pt on input line 430.
+(Font)              scaled to size 7.2pt on input line 456.
 LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/n' will be
-(Font)              scaled to size 5.4pt on input line 430.
-
-
-Package natbib Warning: Citation `Guo2024' on page 11 undefined on input line 442.
-
+(Font)              scaled to size 5.4pt on input line 456.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
 [11.11]
-
-LaTeX Warning: Reference `fig:english_boundary' on page 12 undefined on input line 468.
-
 File: ./picture/1.pdf Graphic file (type pdf)
 <use ./picture/1.pdf>
 LaTeX Font Info:    Font shape `TU/LinLibertine(1)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 473.
+(Font)              scaled to size 8.0pt on input line 499.
 LaTeX Font Info:    Font shape `TU/LinLibertine(1)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 473.
+(Font)              scaled to size 6.0pt on input line 499.
 LaTeX Font Info:    Font shape `TU/LinLibertine(1)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 473.
+(Font)              scaled to size 5.0pt on input line 499.
 
-Class acmart Warning: A possible image without description on input line 475.
+
+Class acmart Warning: A possible image without description on input line 501.
 
 
 
 [12.12]
 
 [13.13]
-
-Package natbib Warning: Citation `Li2018' on page 14 undefined on input line 499.
+Underfull \vbox (badness 1874) has occurred while \output is active []
 
 
 
 [14.14]
 
 [15.15]
-
-Package natbib Warning: Citation `genprog' on page 16 undefined on input line 558.
-
-
-Package natbib Warning: Citation `angelix' on page 16 undefined on input line 558.
-
-
-Package natbib Warning: Citation `deeprepair' on page 16 undefined on input line 558.
-
-
-Package natbib Warning: Citation `tbar' on page 16 undefined on input line 558.
+Underfull \vbox (badness 6412) has occurred while \output is active []
 
 
 
@@ -1700,29 +1615,11 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `inconsolata' (encoding: TU).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
+File: picture/APRframework.pdf Graphic file (type pdf)
+<use picture/APRframework.pdf>
 
 
-Package natbib Warning: Citation `defects4j' on page 17 undefined on input line 561.
-
-
-Package natbib Warning: Citation `selfapr_paper' on page 17 undefined on input line 566.
-
-
-LaTeX Warning: Reference `fig:APRframework' on page 17 undefined on input line 574.
-
-File: picture/APRframework.png Graphic file (type bmp)
-<picture/APRframework.png>
-
-Package natbib Warning: Citation `selfapr_paper' on page 17 undefined on input line 579.
-
-
-Package natbib Warning: Citation `selfapr_paper' on page 17 undefined on input line 579.
-
-
-Class acmart Warning: A possible image without description on input line 581.
-
-
-LaTeX Warning: Reference `tab:perturbation_rules' on page 17 undefined on input line 583.
+Class acmart Warning: A possible image without description on input line 609.
 
 
 
@@ -1730,267 +1627,151 @@ LaTeX Warning: Reference `tab:perturbation_rules' on page 17 undefined on input 
 
 [18.18]
 
-Package natbib Warning: Citation `gzoltar' on page 19 undefined on input line 623.
-
-
-Package natbib Warning: Citation `defects4j' on page 19 undefined on input line 634.
-
-
-Package natbib Warning: Citation `genprog' on page 19 undefined on input line 639.
-
-
-Package natbib Warning: Citation `jgenprog' on page 19 undefined on input line 639.
-
-
-Package natbib Warning: Citation `nopol' on page 19 undefined on input line 640.
-
-
-Package natbib Warning: Citation `angelix' on page 19 undefined on input line 640.
-
-
-Package natbib Warning: Citation `deeprepair' on page 19 undefined on input line 641.
-
-
-Package natbib Warning: Citation `tbar' on page 19 undefined on input line 641.
-
-
-Package natbib Warning: Citation `recoder' on page 19 undefined on input line 641.
-
-
-Package natbib Warning: Citation `cure' on page 19 undefined on input line 641.
-
-
-Package natbib Warning: Citation `buglab' on page 19 undefined on input line 642.
-
-
-Package natbib Warning: Citation `rewardrepair' on page 19 undefined on input line 642.
-
-
-Package natbib Warning: Citation `aprgnn' on page 19 undefined on input line 643.
-
-
-LaTeX Warning: Reference `tab:comparison' on page 19 undefined on input line 654.
-
-
-
 [19.19]
 
 [20.20]
-File: picture/jenkins+ai+cursor.pdf Graphic file (type pdf)
-<use picture/jenkins+ai+cursor.pdf>
-
-
-Package natbib Warning: Citation `Bifet2007' on page 21 undefined on input line 721.
-
-
-Package natbib Warning: Citation `Bifet2007' on page 21 undefined on input line 721.
-
-
-Class acmart Warning: A possible image without description on input line 723.
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 1231) has occurred while \output is active []
 
 
 
 [21.21]
 
-LaTeX Warning: Reference `fig:adwin' on page 22 undefined on input line 733.
+LaTeX Warning: File `Pre.-AI-SE-main/picture/develop1.jpeg' not found on input line 741.
+
+./sample-manuscript.tex:741: Unable to load picture or PDF file 'Pre.-AI-SE-main/picture/develop1.jpeg'.
+<to be read again> 
+                   }
+l.741 ...h]{Pre.-AI-SE-main/picture/develop1.jpeg}
+                                                  
+The requested image couldn't be read because
+it was not a recognized image format.
 
 
-Overfull \hbox (14.64766pt too wide) in paragraph at lines 737--738
- \TU/LinBiolinum(0)/m/it/9 4.2.2 AI-Driven Deployment Strategies.[] \TU/LinLibertine(1)/m/n/9 AI enhances deployment strategies by introducing **risk-aware decision-making**.
+./sample-manuscript.tex:741: Package graphics Error: Division by 0.
+
+See the graphics package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.741 ...h]{Pre.-AI-SE-main/picture/develop1.jpeg}
+                                                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+File: Pre.-AI-SE-main/picture/develop1.jpeg Graphic file (type bmp)
+<Pre.-AI-SE-main/picture/develop1.jpeg>
+
+Class acmart Warning: A possible image without description on input line 744.
+
+
+Overfull \hbox (5.34341pt too wide) in paragraph at lines 747--748
+[]\TU/LinLibertine(0)/b/n/9 Adaptive Chromosome Encoding\TU/LinLibertine(1)/m/n/9 : Representing deployment schemes as tree-structured chromosomes, where
  []
+
+
+LaTeX Warning: File `Pre.-AI-SE-main/picture/develop2.jpeg' not found on input line 764.
+
+./sample-manuscript.tex:764: Unable to load picture or PDF file 'Pre.-AI-SE-main/picture/develop2.jpeg'.
+<to be read again> 
+                   }
+l.764 ...h]{Pre.-AI-SE-main/picture/develop2.jpeg}
+                                                  
+The requested image couldn't be read because
+it was not a recognized image format.
+
+
+./sample-manuscript.tex:764: Package graphics Error: Division by 0.
+
+See the graphics package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.764 ...h]{Pre.-AI-SE-main/picture/develop2.jpeg}
+                                                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+File: Pre.-AI-SE-main/picture/develop2.jpeg Graphic file (type bmp)
+<Pre.-AI-SE-main/picture/develop2.jpeg>
+
+Class acmart Warning: A possible image without description on input line 767.
+
+
+LaTeX Warning: File `Pre.-AI-SE-main/picture/develop3.jpeg' not found on input line 771.
+
+./sample-manuscript.tex:771: Unable to load picture or PDF file 'Pre.-AI-SE-main/picture/develop3.jpeg'.
+<to be read again> 
+                   }
+l.771 ...h]{Pre.-AI-SE-main/picture/develop3.jpeg}
+                                                  
+The requested image couldn't be read because
+it was not a recognized image format.
+
+
+./sample-manuscript.tex:771: Package graphics Error: Division by 0.
+
+See the graphics package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.771 ...h]{Pre.-AI-SE-main/picture/develop3.jpeg}
+                                                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+File: Pre.-AI-SE-main/picture/develop3.jpeg Graphic file (type bmp)
+<Pre.-AI-SE-main/picture/develop3.jpeg>
+
+Class acmart Warning: A possible image without description on input line 774.
+
+File: picture/jenkins+ai+cursor.pdf Graphic file (type pdf)
+<use picture/jenkins+ai+cursor.pdf>
+
+Class acmart Warning: A possible image without description on input line 800.
 
 
 
 [22.22]
 
-[23.23]
+LaTeX Warning: File `Pre.-AI-SE-main/picture/components-of-kubernetes.pdf' not found on input line 823.
 
-LaTeX Warning: Reference `fig:shap' on page 24 undefined on input line 835.
+./sample-manuscript.tex:823: Unable to load picture or PDF file 'Pre.-AI-SE-main/picture/components-of-kubernetes.pdf'.
+<to be read again> 
+                   }
+l.823 ...ain/picture/components-of-kubernetes.pdf}
+                                                  
+The requested image couldn't be read because
+it was not a recognized image format.
 
 
-LaTeX Warning: Reference `fig:shap' on page 24 undefined on input line 837.
+./sample-manuscript.tex:823: Package graphics Error: Division by 0.
 
+See the graphics package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.823 ...ain/picture/components-of-kubernetes.pdf}
+                                                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
 
-Underfull \vbox (badness 2556) has occurred while \output is active []
+File: Pre.-AI-SE-main/picture/components-of-kubernetes.pdf Graphic file (type pdf)
+<use Pre.-AI-SE-main/picture/components-of-kubernetes.pdf>
+./sample-manuscript.tex:823: Unable to load picture or PDF file 'Pre.-AI-SE-main/picture/components-of-kubernetes.pdf'.
+<to be read again> 
+                   \GPT@clipend 
+l.823 ...ain/picture/components-of-kubernetes.pdf}
+                                                  
+The requested image couldn't be read because
+it was not a recognized image format.
 
 
+Class acmart Warning: A possible image without description on input line 826.
 
-[24.24]
-File: picture/5.1fig1.pdf Graphic file (type pdf)
-<use picture/5.1fig1.pdf>
 
 
-Package natbib Warning: Citation `Li2024' on page 25 undefined on input line 853.
-
-
-Package natbib Warning: Citation `Li2024' on page 25 undefined on input line 853.
-
-
-Class acmart Warning: A possible image without description on input line 855.
-
-
-Package natbib Warning: Citation `Li2024' on page 25 undefined on input line 857.
-
-
-
-[25.25]
-
-Package natbib Warning: Citation `Bifet2007' on page 26 undefined on input line 868.
-
-File: picture/5.1fig2.pdf Graphic file (type pdf)
-<use picture/5.1fig2.pdf>
-
-Package natbib Warning: Citation `Bifet2007' on page 26 undefined on input line 874.
-
-
-Package natbib Warning: Citation `Bifet2007' on page 26 undefined on input line 874.
-
-
-Class acmart Warning: A possible image without description on input line 876.
-
-
-
-[26.26]
-
-[27.27]
-
-Package natbib Warning: Citation `Ribeiro2016' on page 28 undefined on input line 904.
-
-File: picture/5.2fig1.pdf Graphic file (type pdf)
-<use picture/5.2fig1.pdf>
-
-Package natbib Warning: Citation `Ribeiro2016' on page 28 undefined on input line 909.
-
-
-Package natbib Warning: Citation `Ribeiro2016' on page 28 undefined on input line 909.
-
-
-Class acmart Warning: A possible image without description on input line 911.
-
-
-
-[28.28]
-
-Package natbib Warning: Citation `Lundberg2017' on page 29 undefined on input line 921.
-
-File: picture/5.2fig2.pdf Graphic file (type pdf)
-<use picture/5.2fig2.pdf>
-
-Package natbib Warning: Citation `Lundberg2017' on page 29 undefined on input line 926.
-
-
-Package natbib Warning: Citation `Lundberg2017' on page 29 undefined on input line 926.
-
-
-Class acmart Warning: A possible image without description on input line 928.
-
-
-
-[29.29]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-[30.30]
-
-LaTeX Warning: Reference `tab:mitigation' on page 31 undefined on input line 950.
-
-
-Overfull \hbox (9.48239pt too wide) in paragraph at lines 967--968
- \TU/LinBiolinum(0)/m/it/9 6.1.2 Impact on Validation Effectiveness.[] \TU/LinLibertine(1)/m/n/9 Data dependency fundamentally compromises traditional validation approaches
- []
-
-
-
-[31.31]
-Underfull \hbox (badness 3746) in paragraph at lines 1002--1003
-[]\TU/LinLibertine(1)/m/n/9 Ensemble Validation: Combine model-centered tests with
- []
-
-
-
-[32.32]
-
-Package natbib Warning: Citation `Zhou2024' on page 33 undefined on input line 1032.
-
-
-LaTeX Warning: Reference `subsec:7.1' on page 33 undefined on input line 1044.
-
-
-LaTeX Warning: Reference `subsec:7.2' on page 33 undefined on input line 1044.
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-[33.33]
-
-Package natbib Warning: Citation `Li2018' on page 34 undefined on input line 1053.
-
-
-Class acmart Warning: \vspace should only be used to provide space above/below surrounding objects on input line 1066.
-
-
-
-[34.34]
-LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/it' will be
-(Font)              scaled to size 7.0pt on input line 1072.
-
-
-Package natbib Warning: There were undefined citations.
-
-
-Class acmart Warning: Some images may lack descriptions.
-
-
-
-[35.35]
-LaTeX Font Info:    Font shape `TU/LinLibertine(1)/m/n' will be
-(Font)              scaled to size 10.95pt on input line 1209.
- (d:/download/texlive/2025/texmf-dist/tex/generic/stringenc/se-pdfdoc.def
-File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
-) (d:/download/texlive/2025/texmf-dist/tex/generic/stringenc/se-utf32be.def
-File: se-utf32be.def 2019/11/29 v1.12 stringenc: UTF-32BE
-) [36.35] (./sample-manuscript.aux
-
-Package natbib Warning: Citation(s) may have changed.
-(natbib)                Rerun to get citations correct.
-
-)
- ***********
-LaTeX2e <2024-11-01> patch level 2
-L3 programming layer <2025-01-18>
- ***********
-
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-LaTeX Warning: Temporary extra page added at the end. Rerun to get it removed.
-
-
-Package rerunfilecheck Warning: File `sample-manuscript.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `sample-manuscript.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  8548A773272578A6A18FCC3AD6F08F16;5268.
- ) 
-Here is how much of TeX's memory you used:
- 32436 strings out of 473839
- 633045 string characters out of 5729454
- 1166121 words of memory out of 5000000
- 54945 multiletter control sequences out of 15000+600000
- 567575 words of font info for 146 fonts, out of 8000000 for 9000
- 1509 hyphenation exceptions out of 8191
- 105i,17n,131p,1741b,32903s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-Output written on sample-manuscript.pdf (36 pages).
+[23.23
